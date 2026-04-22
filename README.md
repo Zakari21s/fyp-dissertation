@@ -50,6 +50,8 @@ Reports are organized by domain/model family:
 - `reports/xgb-eng/`, `reports/xgb-no-eng/`
 - `reports/metadata/`, `reports/docs/`
 
+> Note: some directories listed above are intentionally excluded from GitHub by `.gitignore` (for example generated datasets, parquet artifacts, and runtime logs). These are created locally when the pipeline runs and are omitted from the remote repository to keep it lightweight and reproducible.
+
 ---
 
 ## 3) Environment Setup
@@ -224,4 +226,26 @@ It is structured to support:
 - transparent pipeline stages,
 - auditable outputs,
 - repeatable model comparisons across horizons and feature sets.
+
+---
+
+## 10) Dataset Citation and License
+
+This project uses the SSD dataset associated with the following paper.  
+If you use this repository (or the underlying dataset) in publications, cite:
+
+```bibtex
+@InProceedings{xu2021dsn,
+  title = {General Feature Selection for Failure Prediction in Large-scale SSD Deployment},
+  Booktitle = {Proc. of IEEE/IFIP DSN},
+  author = {Xu, Fan and Han, Shujie and Lee, Patrick PC and Liu, Yi and He, Cheng and Liu, Jiongzhou},
+  year = {2021}
+}
+```
+
+Dataset license (as stated by the dataset provider):
+
+- **CC BY-NC-SA 4.0** (Creative Commons Attribution-NonCommercial-ShareAlike 4.0)
+
+Please ensure your use of the data and derived artifacts complies with the license terms, especially non-commercial use and attribution requirements.
 
