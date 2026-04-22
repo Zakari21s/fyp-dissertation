@@ -510,7 +510,6 @@ def main():
     
     args = parser.parse_args()
     
-    # Load config
     config_path = Path(__file__).parent.parent / 'configs' / 'data_config.yaml'
     if not config_path.exists():
         print(f"Error: Config file not found at {config_path}")
@@ -524,7 +523,6 @@ def main():
         print(f"Available datasets: {list(config['datasets'].keys())}")
         sys.exit(1)
     
-    # Setup logging
     log_dir = Path(config['logging']['log_dir'])
     logger = setup_logging(log_dir, config['logging']['level'], args.dataset)
     

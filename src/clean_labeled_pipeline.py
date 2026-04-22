@@ -56,7 +56,7 @@ class Stage2Stats:
 @dataclass
 class PartitionStats:
     """Statistics for a single partition."""
-    partition: str = ""  # e.g., "year=2018/month=01"
+    partition: str = ""
     rows_in: int = 0
     rows_out: int = 0
     rows_removed: int = 0
@@ -65,7 +65,7 @@ class PartitionStats:
     rows_dropped_missing_disk_id: int = 0
     rows_dropped_missing_smart_day: int = 0
     rows_missing_model: int = 0
-    sample_duplicate_keys: List[Tuple[Any, Any, Any]] = field(default_factory=list)  # List of (disk_id, model, smart_day) tuples
+    sample_duplicate_keys: List[Tuple[Any, Any, Any]] = field(default_factory=list)
 
 
 @dataclass
@@ -90,7 +90,7 @@ class Stage3Stats:
 @dataclass
 class PartitionStats4:
     """Statistics for a single partition in Stage 4."""
-    partition: str = ""  # e.g., "year=2018/month=01"
+    partition: str = ""
     rows_in: int = 0
     rows_out: int = 0
     rows_dropped_min_features: int = 0
@@ -109,7 +109,7 @@ class Stage4Stats:
     num_smart_features_dropped_low_coverage: int = 0
     num_smart_features_dropped_constant: int = 0
     num_smart_features_kept: int = 0
-    top_20_most_missing_features: List[Tuple[str, float, float]] = field(default_factory=list)  # (feature, coverage, missing_rate)
+    top_20_most_missing_features: List[Tuple[str, float, float]] = field(default_factory=list)
     dropped_features: List[str] = field(default_factory=list)
     kept_features: List[str] = field(default_factory=list)
     partition_stats: List[PartitionStats4] = field(default_factory=list)
@@ -120,7 +120,7 @@ class Stage4Stats:
 @dataclass
 class PartitionStats6:
     """Statistics for a single partition in Stage 6."""
-    partition: str = ""  # e.g., "year=2018/month=01"
+    partition: str = ""
     rows_in: int = 0
     rows_out: int = 0
     rows_dropped_missing_disk_id: int = 0
@@ -144,10 +144,10 @@ class Stage6Stats:
     rows_dropped_missing_smart_day: int = 0
     rows_dropped_missing_ds: int = 0
     rows_dropped_invalid_labels: int = 0
-    num_negative_r_values_fixed_to_nan: Dict[str, int] = field(default_factory=dict)  # by column
-    num_out_of_range_n_values_fixed_to_nan: Dict[str, int] = field(default_factory=dict)  # by column
+    num_negative_r_values_fixed_to_nan: Dict[str, int] = field(default_factory=dict)
+    num_out_of_range_n_values_fixed_to_nan: Dict[str, int] = field(default_factory=dict)
     duplicate_key_count_per_partition: Dict[str, int] = field(default_factory=dict)
-    sample_invalid_rows: Dict[str, List[Dict[str, Any]]] = field(default_factory=dict)  # by rule, up to 5 examples
+    sample_invalid_rows: Dict[str, List[Dict[str, Any]]] = field(default_factory=dict)
     partition_stats: List[PartitionStats6] = field(default_factory=list)
     processing_time_seconds: float = 0.0
 
@@ -190,8 +190,8 @@ class Stage7Stats:
     schema_columns: List[str] = field(default_factory=list)
     schema_consistent: bool = False
     dtypes: Dict[str, str] = field(default_factory=dict)
-    missingness: Dict[str, float] = field(default_factory=dict)  # column -> missing %
-    label_distribution: Dict[str, Dict[str, int]] = field(default_factory=dict)  # y_7/y_14/y_30 -> {positive, negative, total}
+    missingness: Dict[str, float] = field(default_factory=dict)
+    label_distribution: Dict[str, Dict[str, int]] = field(default_factory=dict)
     label_nesting_violations: int = 0
     duplicate_key_count: int = 0
     rows_per_partition: Dict[str, int] = field(default_factory=dict)
@@ -210,7 +210,6 @@ def setup_logging(log_dir: Path, log_level: str, dataset_name: str) -> logging.L
     log_dir.mkdir(parents=True, exist_ok=True)
     log_file = log_dir / f"clean_labeled_{dataset_name}.log"
     
-    # Get root logger
     root_logger = logging.getLogger()
     root_logger.setLevel(getattr(logging, log_level.upper()))
     
@@ -346,7 +345,6 @@ def process_stage1(
     logger.info("STAGE 1: SCHEMA STANDARDIZATION")
     logger.info("=" * 60)
     
-    # Find all parquet files
     parquet_files = find_parquet_files(input_dir)
     stats.total_files = len(parquet_files)
     logger.info(f"Found {stats.total_files} parquet files")
@@ -373,7 +371,6 @@ def process_stage1(
     if missing_required:
         logger.warning(f"Missing required columns: {missing_required}")
     
-    # Process each file
     output_dir.mkdir(parents=True, exist_ok=True)
     
     for file_idx, parquet_file in enumerate(parquet_files, 1):
@@ -407,7 +404,6 @@ def process_stage1(
             output_path = output_dir / rel_path
             output_path.parent.mkdir(parents=True, exist_ok=True)
             
-            # Write standardized parquet
             df.to_parquet(output_path, index=False, engine='pyarrow')
             
             stats.total_rows_out += len(df)
@@ -500,7 +496,6 @@ def process_stage2(
     logger.info("STAGE 2: TYPE FIXING")
     logger.info("=" * 60)
     
-    # Find all parquet files
     parquet_files = find_parquet_files(input_dir)
     stats.total_files = len(parquet_files)
     logger.info(f"Found {stats.total_files} parquet files")
@@ -509,8 +504,7 @@ def process_stage2(
         logger.error(f"No parquet files found in {input_dir}")
         return stats
     
-    # Define type mapping
-    # Note: ds can be int32 or string - preserve original if string, convert if numeric
+    # ds may be string or numeric; keep strings as-is, coerce numeric values.
     type_mapping = {
         'disk_id': 'Int64',
         'smart_day': 'datetime64[ns]',
@@ -521,7 +515,7 @@ def process_stage2(
         'model': 'string',
     }
     
-    # Special handling for ds: preserve type if string, convert to int32 if numeric
+    # Handle mixed ds types safely.
     def coerce_ds(series: pd.Series) -> pd.Series:
         """Coerce ds column: keep string if string, convert to int32 if numeric."""
         if series.dtype == 'object' or pd.api.types.is_string_dtype(series):
@@ -532,7 +526,6 @@ def process_stage2(
             # Use Int32 (nullable) then convert non-null to int32
             return numeric.astype('Int32')
     
-    # Process each file
     output_dir.mkdir(parents=True, exist_ok=True)
     
     for file_idx, parquet_file in enumerate(parquet_files, 1):
@@ -570,7 +563,7 @@ def process_stage2(
                 if col in type_mapping:
                     target_type = type_mapping[col]
                 elif col.startswith('n_') or col.startswith('r_'):
-                    target_type = 'float64'  # SMART features
+                    target_type = 'float64'
                 else:
                     # Keep original type for unknown columns, but track dtype
                     stats.dtype_map[col] = str(df[col].dtype)
@@ -595,7 +588,6 @@ def process_stage2(
             output_path = output_dir / rel_path
             output_path.parent.mkdir(parents=True, exist_ok=True)
             
-            # Write typed parquet
             df.to_parquet(output_path, index=False, engine='pyarrow')
             
             stats.total_rows_out += len(df)
@@ -760,7 +752,6 @@ def process_stage3(
     logger.info("STAGE 3: DEDUPLICATION SAFETY CHECK (STREAMING, PARTITION-LEVEL)")
     logger.info("=" * 60)
     
-    # Find all partition directories
     partitions = find_partitions(input_dir)
     stats.total_partitions = len(partitions)
     logger.info(f"Found {stats.total_partitions} partitions")
@@ -773,7 +764,6 @@ def process_stage3(
     key_columns = ['disk_id', 'model', 'smart_day']
     batch_size = 250_000
     
-    # Process each partition
     for partition_idx, partition_dir in enumerate(partitions, 1):
         partition_name = f"{partition_dir.parent.name}/{partition_dir.name}"
         logger.info(f"Processing partition {partition_idx}/{stats.total_partitions}: {partition_name}")
@@ -781,7 +771,6 @@ def process_stage3(
         partition_stat = PartitionStats(partition=partition_name)
         
         try:
-            # Find all parquet files in this partition
             parquet_files = sorted(partition_dir.glob("*.parquet"))
             stats.total_files += len(parquet_files)
             
@@ -809,7 +798,6 @@ def process_stage3(
             # Sample duplicate keys (up to 20)
             sample_duplicates = []
             
-            # Process each file in the partition
             for file_idx, parquet_file in enumerate(parquet_files, 1):
                 try:
                     logger.info(f"  Processing file {file_idx}/{len(parquet_files)}: {parquet_file.name}")
@@ -911,7 +899,6 @@ def process_stage3(
                         partition_stat.rows_out += len(df_kept)
                         stats.total_rows_out += len(df_kept)
                         
-                        # Write kept batch immediately
                         if len(df_kept) > 0:
                             # Ensure column order matches schema
                             schema_cols = [field.name for field in schema]
@@ -1113,7 +1100,6 @@ def process_stage4(
     # Key columns that must always be kept
     always_keep_columns = ['disk_id', 'model', 'ds', 'smart_day', 'y_7', 'y_14', 'y_30']
     
-    # Find all partition directories
     partitions = find_partitions(input_dir)
     stats.total_partitions = len(partitions)
     logger.info(f"Found {stats.total_partitions} partitions")
@@ -1122,7 +1108,6 @@ def process_stage4(
         logger.error(f"No partitions found in {input_dir}")
         return stats
     
-    # ===== PASS 1: Compute global statistics =====
     logger.info("=" * 60)
     logger.info("PASS 1: Computing global feature statistics")
     logger.info("=" * 60)
@@ -1232,14 +1217,12 @@ def process_stage4(
         indicator_features = [col for col, _ in kept_coverage_sorted[:indicators_top_k]]
         logger.info(f"Will create missingness indicators for {len(indicator_features)} features")
     
-    # ===== PASS 2: Write filtered output =====
     logger.info("=" * 60)
     logger.info("PASS 2: Writing filtered output")
     logger.info("=" * 60)
     
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    # Process each partition
     for partition_idx, partition_dir in enumerate(partitions, 1):
         partition_name = f"{partition_dir.parent.name}/{partition_dir.name}"
         logger.info(f"Processing partition {partition_idx}/{stats.total_partitions}: {partition_name}")
@@ -1489,7 +1472,6 @@ def process_stage6(
     logger.info("STAGE 6: INVALID RECORD FILTERING + LABEL/KEY SANITY")
     logger.info("=" * 60)
     
-    # Find all partition directories
     partitions = find_partitions(input_dir)
     stats.total_partitions = len(partitions)
     logger.info(f"Found {stats.total_partitions} partitions")
@@ -1504,7 +1486,6 @@ def process_stage6(
     key_columns = ['disk_id', 'model', 'smart_day']
     label_columns = ['y_7', 'y_14', 'y_30']
     
-    # Process each partition
     for partition_idx, partition_dir in enumerate(partitions, 1):
         partition_name = f"{partition_dir.parent.name}/{partition_dir.name}"
         logger.info(f"Processing partition {partition_idx}/{stats.total_partitions}: {partition_name}")
@@ -1519,7 +1500,7 @@ def process_stage6(
                 continue
             
             # Read parquet file (should be manageable per month)
-            parquet_file = parquet_files[0]  # Usually just data.parquet
+            parquet_file = parquet_files[0]
             
             try:
                 df = pd.read_parquet(parquet_file)
@@ -1842,9 +1823,8 @@ def process_stage7(
     logger.info("=" * 60)
     logger.info("STAGE 7: FINAL QA SUMMARY + ACCEPTANCE CRITERIA VALIDATION")
     logger.info("=" * 60)
-    logger.info("IMPORTANT: This is a read-only validation stage. No data will be modified.")
+    logger.info("Read-only validation stage: no data is modified.")
     
-    # Find all partition directories
     partitions = find_partitions(input_dir)
     stats.total_partitions = len(partitions)
     logger.info(f"Found {stats.total_partitions} partitions")
@@ -1859,19 +1839,18 @@ def process_stage7(
     label_columns = ['y_7', 'y_14', 'y_30']
     
     # Track schema consistency
-    all_schemas: List[Tuple[str, List[str]]] = []  # (partition, columns)
-    all_dtypes: Dict[str, Dict[str, str]] = {}  # partition -> {col: dtype}
+    all_schemas: List[Tuple[str, List[str]]] = []
+    all_dtypes: Dict[str, Dict[str, str]] = {}
     all_disk_ids: Set[Any] = set()
-    all_disk_models: Set[Tuple[Any, Any]] = set()  # (disk_id, model) tuples
+    all_disk_models: Set[Tuple[Any, Any]] = set()
     all_dates: List[Any] = []
     column_missing_counts: Dict[str, int] = defaultdict(int)
     label_counts: Dict[str, Dict[str, int]] = defaultdict(lambda: {'positive': 0, 'negative': 0, 'total': 0})
     label_nesting_violations_count: int = 0
     # Track duplicates per partition (not across dataset - Stage 3 already handled global dedup)
-    duplicate_key_samples: List[Tuple[str, Tuple[Any, Any, Any]]] = []  # (partition, key) samples
-    max_duplicate_samples = 100  # Limit samples to avoid memory issues
+    duplicate_key_samples: List[Tuple[str, Tuple[Any, Any, Any]]] = []
+    max_duplicate_samples = 100
     
-    # Process each partition
     for partition_idx, partition_dir in enumerate(partitions, 1):
         partition_name = f"{partition_dir.parent.name}/{partition_dir.name}"
         logger.info(f"Processing partition {partition_idx}/{stats.total_partitions}: {partition_name}")
@@ -1997,8 +1976,7 @@ def process_stage7(
             logger.error(f"Error processing partition {partition_name}: {e}", exc_info=True)
             continue
     
-    # Compute final statistics
-    # Note: counts may be samples if dataset is very large
+    # Compute final statistics (counts can be sampled on very large datasets).
     stats.unique_disk_id_count = len(all_disk_ids)
     stats.unique_disk_model_count = len(all_disk_models)
     stats.label_nesting_violations = label_nesting_violations_count
@@ -2140,7 +2118,7 @@ def process_stage7(
     
     criteria.missingness = len(missingness_issues) == 0
     if missingness_issues:
-        criteria.missingness_notes = "; ".join(missingness_issues[:5])  # Show first 5
+        criteria.missingness_notes = "; ".join(missingness_issues[:5])
     else:
         criteria.missingness_notes = "All identifiers/labels have 0% missing; all other columns < 95%"
     
@@ -2314,7 +2292,7 @@ def write_stage7_reports(stats: Stage7Stats, dataset_name: str, logger: logging.
     with open(md_path, 'w') as f:
         f.write(f"# Stage 7: Final QA Summary + Acceptance Criteria Validation - {dataset_name}\n\n")
         f.write(f"**Generated:** {datetime.now().isoformat()}\n\n")
-        f.write("**IMPORTANT:** This is a read-only validation stage. No data was modified.\n\n")
+        f.write("This is a read-only validation stage. No data was modified.\n\n")
         
         f.write("## Overview\n\n")
         f.write(f"- **Dataset:** {dataset_name}\n")
@@ -2447,7 +2425,6 @@ def main():
     
     args = parser.parse_args()
     
-    # Load config
     config_path = Path(__file__).parent.parent / 'configs' / 'data_config.yaml'
     if not config_path.exists():
         print(f"Error: Config file not found at {config_path}")
@@ -2455,13 +2432,11 @@ def main():
     
     config = load_config(config_path)
     
-    # Validate dataset
     if args.dataset not in config['datasets']:
         print(f"Error: Dataset '{args.dataset}' not found in config")
         print(f"Available datasets: {list(config['datasets'].keys())}")
         sys.exit(1)
     
-    # Setup logging
     log_dir = Path(config['logging']['log_dir'])
     logger = setup_logging(log_dir, config['logging']['level'], args.dataset)
     
@@ -2471,21 +2446,18 @@ def main():
     logger.info(f"Dataset: {args.dataset}")
     logger.info(f"Stage: {args.stage}")
     
-    # Determine input/output directories
     labeled_dir = Path('data_clean') / f"labeled_{args.dataset}"
     
     if not labeled_dir.exists():
         logger.error(f"Labeled dataset not found at {labeled_dir}")
         sys.exit(1)
     
-    # Process stages
     if args.stage in ['1', 'all']:
         stage1_output = Path('data_interim') / f"clean_stage1_{args.dataset}"
         stats1 = process_stage1(labeled_dir, stage1_output, args.dataset, logger)
         write_stage1_reports(stats1, args.dataset, logger)
     
     if args.stage in ['2', 'all']:
-        # Stage 2 input: Stage 1 output if it exists, otherwise labeled dir
         stage1_output = Path('data_interim') / f"clean_stage1_{args.dataset}"
         if stage1_output.exists() and any(stage1_output.rglob("*.parquet")):
             stage2_input = stage1_output
@@ -2499,7 +2471,6 @@ def main():
         write_stage2_reports(stats2, args.dataset, logger)
     
     if args.stage in ['3', 'all']:
-        # Stage 3 input: Stage 2 output if it exists, otherwise try Stage 1, otherwise labeled dir
         stage2_output = Path('data_interim') / f"clean_stage2_{args.dataset}"
         if stage2_output.exists() and any(stage2_output.rglob("*.parquet")):
             stage3_input = stage2_output
@@ -2518,7 +2489,6 @@ def main():
         write_stage3_reports(stats3, args.dataset, logger)
     
     if args.stage in ['4', 'all']:
-        # Stage 4 input: Stage 3 output if it exists, otherwise try Stage 2, otherwise Stage 1, otherwise labeled dir
         stage3_output = Path('data_interim') / f"clean_stage3_{args.dataset}"
         if stage3_output.exists() and any(stage3_output.rglob("*.parquet")):
             stage4_input = stage3_output
@@ -2542,7 +2512,6 @@ def main():
         write_stage4_reports(stats4, args.dataset, logger)
     
     if args.stage in ['6', 'all']:
-        # Stage 6 input: Stage 4 output if it exists, otherwise try Stage 3, Stage 2, Stage 1, or labeled dir
         stage4_output = Path('data_interim') / f"clean_stage4_{args.dataset}"
         if stage4_output.exists() and any(stage4_output.rglob("*.parquet")):
             stage6_input = stage4_output
@@ -2571,7 +2540,6 @@ def main():
         write_stage6_reports(stats6, args.dataset, logger)
     
     if args.stage in ['7', 'all']:
-        # Stage 7 input: Stage 6 output if it exists, otherwise try Stage 4, Stage 3, Stage 2, Stage 1, or labeled dir
         stage6_output = Path('data_interim') / f"clean_stage6_{args.dataset}"
         if stage6_output.exists() and any(stage6_output.rglob("*.parquet")):
             stage7_input = stage6_output

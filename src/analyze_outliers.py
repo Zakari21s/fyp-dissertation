@@ -4,7 +4,7 @@ Stage 5: Outlier Analysis for SMART Features (Analysis Only - No Data Modificati
 This module analyzes extreme values in SMART features to understand their distribution
 and support decisions on outlier handling. This is a read-only analysis stage.
 
-IMPORTANT: This module does NOT modify, filter, clip, or rewrite any data.
+Note: this stage is read-only and does not change data.
 """
 
 import argparse
@@ -26,15 +26,15 @@ import pyarrow.parquet as pq
 class FeatureStats:
     """Statistics for a single SMART feature."""
     feature_name: str = ""
-    count: int = 0  # non-null count
+    count: int = 0
     min_val: Optional[float] = None
     max_val: Optional[float] = None
     sum_val: float = 0.0
-    sum_sq: float = 0.0  # sum of squares for std calculation
+    sum_sq: float = 0.0
     zero_count: int = 0
     negative_count: int = 0
-    extreme_count: int = 0  # > 99.9 percentile (computed after percentiles)
-    percentiles: Dict[float, float] = field(default_factory=dict)  # {0.1: val, 1.0: val, 99.0: val, 99.9: val}
+    extreme_count: int = 0
+    percentiles: Dict[float, float] = field(default_factory=dict)
     # For approximate quantiles using reservoir sampling
     sample_values: List[float] = field(default_factory=list)
     max_sample_size: int = 10000
@@ -67,19 +67,15 @@ def setup_logging(log_dir: Path, log_level: str, dataset_name: str) -> logging.L
     log_dir.mkdir(parents=True, exist_ok=True)
     log_file = log_dir / f"clean_stage5_{dataset_name}.log"
     
-    # Get root logger
     root_logger = logging.getLogger()
     root_logger.setLevel(getattr(logging, log_level.upper()))
     
-    # Remove existing handlers to avoid duplicates
     root_logger.handlers.clear()
     
-    # Add file handler
     file_handler = logging.FileHandler(log_file, mode='w')
     file_handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
     root_logger.addHandler(file_handler)
     
-    # Add stream handler
     stream_handler = logging.StreamHandler(sys.stdout)
     stream_handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
     root_logger.addHandler(stream_handler)
@@ -131,8 +127,10 @@ def analyze_feature_chunk(
         return
     
     # Update counts
+    # Update counts
     stats.count += len(non_null)
     
+    # Update min/max
     # Update min/max
     chunk_min = non_null.min()
     chunk_max = non_null.max()
@@ -142,13 +140,16 @@ def analyze_feature_chunk(
         stats.max_val = float(chunk_max)
     
     # Update sum and sum of squares for mean/std
+    # Update sum and sum of squares for mean/std
     stats.sum_val += float(non_null.sum())
     stats.sum_sq += float((non_null ** 2).sum())
     
     # Count zeros and negatives
+    # Count zeros and negatives
     stats.zero_count += int((non_null == 0).sum())
     stats.negative_count += int((non_null < 0).sum())
     
+    # Update reservoir sample for percentiles
     # Update reservoir sample for percentiles
     for val in non_null.values:
         update_reservoir_sample(stats.sample_values, float(val), stats.max_sample_size, stats.count, rng)
@@ -165,7 +166,7 @@ def compute_final_statistics(stats: FeatureStats, percentiles: List[float]) -> F
     # Compute standard deviation
     if stats.count > 1:
         variance = (stats.sum_sq / stats.count) - (mean_val ** 2)
-        std_val = np.sqrt(max(0, variance))  # Ensure non-negative
+        std_val = np.sqrt(max(0, variance))
     else:
         std_val = 0.0
     
@@ -177,8 +178,7 @@ def compute_final_statistics(stats: FeatureStats, percentiles: List[float]) -> F
             idx = max(0, min(idx, len(sorted_sample) - 1))
             stats.percentiles[p] = float(sorted_sample[idx])
     
-    # Compute extreme count threshold (99.9 percentile)
-    # This is approximate - we count in the sample and scale to full dataset
+    # Estimate extreme frequency from the sample, then scale to full count.
     if 99.9 in stats.percentiles and len(stats.sample_values) > 0:
         extreme_threshold = stats.percentiles[99.9]
         # Count values above threshold in sample
@@ -211,7 +211,7 @@ def analyze_outliers(
     logger.info(f"Dataset: {dataset_name}")
     logger.info(f"Input directory: {input_dir}")
     logger.info(f"Percentiles: {percentiles}")
-    logger.info("IMPORTANT: This is analysis only - no data will be modified")
+    logger.info("Read-only analysis only: no data changes")
     
     # Find partitions
     partitions = find_partitions(input_dir)
@@ -269,15 +269,15 @@ def analyze_outliers(
     
     # Initialize statistics for each feature
     import random
-    base_rng = random.Random(42)  # Seed for reproducibility
-    feature_rngs = {}  # Store RNGs separately
+    base_rng = random.Random(42)
+    feature_rngs = {}
     
     for feature in sorted(all_smart_features):
         feature_stats[feature] = FeatureStats(
             feature_name=feature,
             max_sample_size=10000
         )
-        feature_rngs[feature] = random.Random(base_rng.random())  # Create independent RNG for each feature
+        feature_rngs[feature] = random.Random(base_rng.random())
     
     stats.smart_features_analyzed = len(feature_stats)
     logger.info(f"Found {stats.smart_features_analyzed} SMART features to analyze")
@@ -420,7 +420,7 @@ def write_reports(stats: OutlierAnalysisStats, dataset_name: str, logger: loggin
     with open(md_path, 'w') as f:
         f.write(f"# Stage 5: Outlier Analysis - {dataset_name}\n\n")
         f.write(f"**Generated:** {datetime.now().isoformat()}\n\n")
-        f.write("**IMPORTANT:** This is an analysis-only stage. No data was modified.\n\n")
+        f.write("This stage is read-only. No data was modified.\n\n")
         
         f.write("## Overview\n\n")
         f.write(f"- **Dataset:** {dataset_name}\n")
@@ -495,8 +495,7 @@ def write_reports(stats: OutlierAnalysisStats, dataset_name: str, logger: loggin
             )
         f.write("\n")
         
-        # Interpretation section
-        f.write("## Interpretation\n\n")
+        f.write("## Notes\n\n")
         f.write("### Are Outliers Likely Noise or Signal?\n\n")
         f.write("SMART attributes are hardware sensor readings that may exhibit extreme values when:\n")
         f.write("- Hardware is approaching failure (predictive signal)\n")
@@ -522,12 +521,11 @@ def write_reports(stats: OutlierAnalysisStats, dataset_name: str, logger: loggin
         f.write("This analysis aggregates across all disk models. Model-specific analysis would require ")
         f.write("grouping by the `model` column to identify if certain models exhibit different outlier patterns.\n\n")
         
-        # Decision section
-        f.write("## Decision\n\n")
+        f.write("## Recommendation\n\n")
         f.write("### No Outlier Clipping Applied\n\n")
         f.write("**At this stage, no outlier clipping has been applied.**\n\n")
         f.write("### Future Clipping Considerations\n\n")
-        f.write("If outlier clipping is deemed necessary during model training, it MUST:\n")
+        f.write("If you later add clipping during model training, it should:\n")
         f.write("1. Be computed on training data only (to prevent data leakage)\n")
         f.write("2. Use train-set percentiles (e.g., 1st and 99th) as clipping boundaries\n")
         f.write("3. Apply the same boundaries to test data\n")
@@ -556,7 +554,6 @@ def main():
     
     args = parser.parse_args()
     
-    # Load config
     config_path = Path(__file__).parent.parent / 'configs' / 'data_config.yaml'
     if not config_path.exists():
         print(f"Error: Config file not found at {config_path}")
@@ -570,7 +567,6 @@ def main():
         print(f"Available datasets: {list(config['datasets'].keys())}")
         sys.exit(1)
     
-    # Setup logging
     log_dir = Path(config['logging']['log_dir'])
     logger = setup_logging(log_dir, config['logging']['level'], args.dataset)
     

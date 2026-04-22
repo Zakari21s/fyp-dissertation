@@ -652,7 +652,7 @@ def run_pipeline(
     is_train = split == "train"
     rows_written_global = [0]
 
-    # --- first_seen + train collect / merge ---
+    # Build first_seen from train, then merge it into val/test.
     if is_train:
         first_seen_dict, models_seen = pass0_collect_first_seen_and_models(
             partitions, batch_size, logger
@@ -667,7 +667,7 @@ def run_pipeline(
         )
         model_mapping = load_model_mapping(experiment, logger) or {}
 
-    # age_days note in report
+    # Keep a plain-English definition of age_days for the report.
     age_note = (
         "age_days = (smart_day.date() - first_seen[disk]).days >= 0; "
         "first_seen is global min smart_day per disk over this split, "

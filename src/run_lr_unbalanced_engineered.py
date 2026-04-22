@@ -162,11 +162,11 @@ class BaselineResults:
     always_negative: ModelResults = field(default_factory=lambda: ModelResults(model_name="always_negative"))
     logistic_regression: ModelResults = field(default_factory=lambda: ModelResults(model_name="logistic_regression"))
     processing_time_seconds: float = 0.0
-    # sklearn `class_weight` for LR: "balanced" matches train_baselines_y30; None if --no_class_weight
+    # Keep default aligned with `train_baselines_y30`; disable via `--no_class_weight`.
     lr_class_weight: Optional[str] = "balanced"
     feature_set: str = "all"
     feature_names: List[str] = field(default_factory=list)
-    # Train-only negative downsampling (--train-neg-ratio); None = disabled
+    # Optional train-only negative downsampling (`--train-neg-ratio`).
     train_neg_ratio: Optional[int] = None
     train_pool_rows: Optional[int] = None
     train_pool_positives: Optional[int] = None
@@ -838,7 +838,7 @@ def write_reports(
 
 
 def _epilog_six_horizon_runs() -> str:
-    """Copy-paste block for y_7 / y_14 × baseline | rollmean | rollvar with TNR=2."""
+    """CLI examples for y_7 and y_14 runs with TNR=2."""
     base = (
         "python -m src.run_lr_unbalanced_engineered "
         "--experiment exp_time_generalisation --train-neg-ratio 2"
@@ -946,7 +946,7 @@ def main() -> None:
         log_dir, config["logging"]["level"], args.experiment, label_slug, run_suffix=run_suffix
     )
 
-    # data_engineered (not data_splits)
+    # Engineered features live under `data_engineered`.
     input_base_dir = base_dir / "data_engineered"
 
     try:

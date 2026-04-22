@@ -40,7 +40,7 @@ TOP_N_CONSOLE = 20
 MIN_VALID_COUNT = 50_000
 DEFAULT_BINS = 256
 DEFAULT_BATCH_SIZE = 250_000
-LOG_ROWS_EVERY = 5_000_000  # log progress every N rows scanned
+LOG_ROWS_EVERY = 5_000_000
 # Conservative default cap for local runs; set env FULL_RUN=1 for full 133M+ scan
 DEFAULT_MAX_ROWS_CAP = 20_000_000
 
@@ -293,13 +293,7 @@ def run_feature_by_feature(
         if rec is None:
             continue
         results.append(rec)
-        # Count rows once (from first feature's first pass we don't have it here; count in process_one_feature and return?)
-        # Simpler: count rows in a single lightweight pass, or report "see per-feature valid_count". User asked for rows_scanned.
-        # We can run a tiny "count pass" that only reads label column and counts, with max_rows. That's one extra pass but minimal memory.
-        # Alternatively: sum valid_count across features is wrong. So we need one dedicated row-count pass that only reads one column and stops at max_rows.
-        # For now, set rows_scanned from the first feature: we don't have it. So we'll add a quick row-count at the start that streams only label_col and counts rows (with max_rows). That gives us rows_scanned and partitions_scanned.
-        # Actually user said "rows_scanned and partitions_scanned summary line". So we need to know total rows (capped by max_rows). Easiest: in run_feature_by_feature, do one initial pass that only reads label_col and counts rows (with max_rows). Then we have rows_scanned. partitions_scanned we already have from collect_parquet_files.
-    # Count rows in one lightweight pass (only label column)
+    # Count rows separately so the run summary reports one consistent total.
     if not parquet_files:
         return results, 0, partitions_scanned
     rows_scanned = 0

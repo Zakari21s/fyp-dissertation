@@ -1,7 +1,7 @@
 """
 Audit failure labels CSV file.
 
-This script performs comprehensive data quality audits on the failure labels file including:
+This script audits the failure labels file for:
 - Row counts
 - Column schema and dtype inference
 - Missingness analysis
@@ -63,7 +63,6 @@ def parse_datetime_column(df: pd.DataFrame, column: str, logger: logging.Logger)
     format_used = None
     inferred_format = None
     
-    # Step 1: Try pandas with UTC and infer_datetime_format
     try:
         parsed = pd.to_datetime(df[column], errors='coerce', utc=True, infer_datetime_format=True)
         success_count = parsed.notna().sum()
@@ -84,7 +83,6 @@ def parse_datetime_column(df: pd.DataFrame, column: str, logger: logging.Logger)
     except Exception as e:
         logger.debug(f"pandas infer_datetime_format with UTC failed: {e}")
     
-    # Step 2: If parse rate < 0.95, try specific formats
     if parsed_series is None or parsed_series.notna().sum() / len(df) < 0.95:
         specific_formats = [
             '%Y%m%d',                    # 20190322
@@ -120,7 +118,6 @@ def parse_datetime_column(df: pd.DataFrame, column: str, logger: logging.Logger)
             parsed_series = best_parsed
             format_used = best_format
     
-    # Step 3: If still low success rate, try Unix timestamps
     if parsed_series is None or parsed_series.notna().sum() / len(df) < 0.95:
         try:
             numeric_vals = pd.to_numeric(df[column], errors='coerce')
@@ -135,8 +132,8 @@ def parse_datetime_column(df: pd.DataFrame, column: str, logger: logging.Logger)
                     # Try seconds (10 digits) - Unix timestamp range: 2000-01-01 to 2100-01-01
                     if (digit_lengths == 10).any():
                         formats_tried.append('unix_seconds')
-                        min_ts = 946684800  # 2000-01-01
-                        max_ts = 4102444800  # 2100-01-01
+                        min_ts = 946684800
+                        max_ts = 4102444800
                         
                         # Create mask for valid range
                         valid_mask = (numeric_vals >= min_ts) & (numeric_vals <= max_ts) & numeric_vals.notna()
@@ -158,8 +155,8 @@ def parse_datetime_column(df: pd.DataFrame, column: str, logger: logging.Logger)
                     # Try milliseconds (13 digits)
                     if (digit_lengths == 13).any():
                         formats_tried.append('unix_milliseconds')
-                        min_ts_ms = 946684800000  # 2000-01-01
-                        max_ts_ms = 4102444800000  # 2100-01-01
+                        min_ts_ms = 946684800000
+                        max_ts_ms = 4102444800000
                         
                         # Create mask for valid range
                         valid_mask = (numeric_vals >= min_ts_ms) & (numeric_vals <= max_ts_ms) & numeric_vals.notna()
@@ -485,7 +482,6 @@ def main():
     parser = argparse.ArgumentParser(description='Audit failure labels CSV file')
     args = parser.parse_args()
     
-    # Load config
     config_path = Path(__file__).parent.parent / 'configs' / 'data_config.yaml'
     if not config_path.exists():
         print(f"Error: Config file not found at {config_path}")
@@ -498,7 +494,6 @@ def main():
         print("Error: 'labels.failure_label_file' not found in config")
         sys.exit(1)
     
-    # Setup logging
     log_dir = Path(config['logging']['log_dir'])
     logger = setup_logging(log_dir, config['logging']['level'])
     

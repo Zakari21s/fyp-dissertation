@@ -41,10 +41,10 @@ class ModelMetrics:
     precision: float = 0.0
     recall: float = 0.0
     f1: float = 0.0
-    tn: int = 0  # True negatives
-    fp: int = 0  # False positives
-    fn: int = 0  # False negatives
-    tp: int = 0  # True positives
+    tn: int = 0
+    fp: int = 0
+    fn: int = 0
+    tp: int = 0
 
 
 @dataclass
@@ -53,7 +53,7 @@ class ModelResults:
     model_name: str = ""
     val_metrics: ModelMetrics = field(default_factory=lambda: ModelMetrics(split_name='val'))
     test_metrics: ModelMetrics = field(default_factory=lambda: ModelMetrics(split_name='test'))
-    best_threshold: Optional[float] = None  # For LR, best threshold found on VAL
+    best_threshold: Optional[float] = None
 
 
 @dataclass
@@ -87,19 +87,15 @@ def setup_logging(log_dir: Path, log_level: str, experiment_name: str) -> loggin
     log_dir.mkdir(parents=True, exist_ok=True)
     log_file = log_dir / f"baseline_y14_{experiment_name}.log"
     
-    # Get root logger
     root_logger = logging.getLogger()
     root_logger.setLevel(getattr(logging, log_level.upper()))
     
-    # Remove existing handlers to avoid duplicates
     root_logger.handlers.clear()
     
-    # Add file handler
     file_handler = logging.FileHandler(log_file, mode='a')
     file_handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
     root_logger.addHandler(file_handler)
     
-    # Add stream handler
     stream_handler = logging.StreamHandler(sys.stdout)
     stream_handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
     root_logger.addHandler(stream_handler)
@@ -168,19 +164,16 @@ def load_split_data_iterative(
     if len(all_dataframes) == 0:
         return pd.DataFrame()
     
-    # Combine all dataframes
     df_combined = pd.concat(all_dataframes, ignore_index=True)
     
-    # Sample if needed (downsample negatives only, keep all positives)
+    # If capped, keep all positives and downsample negatives.
     if max_rows is not None and len(df_combined) > max_rows:
         logger.info(f"Sampling from {len(df_combined):,} rows to {max_rows:,} rows")
         
         if 'y_14' not in df_combined.columns:
             logger.warning("Column 'y_14' not found, cannot perform smart sampling")
-            # Just random sample
             df_combined = df_combined.sample(n=max_rows, random_state=seed).reset_index(drop=True)
         else:
-            # Separate positives and negatives
             positives = df_combined[df_combined['y_14'] == 1].copy()
             negatives = df_combined[df_combined['y_14'] == 0].copy()
             
@@ -188,19 +181,15 @@ def load_split_data_iterative(
             n_negatives_needed = max_rows - n_positives
             
             if n_negatives_needed < 0:
-                # More positives than max_rows, keep all positives
                 logger.warning(f"More positives ({n_positives:,}) than max_rows ({max_rows:,}), keeping all positives")
                 df_combined = positives.sample(n=max_rows, random_state=seed).reset_index(drop=True)
             else:
-                # Sample negatives
                 if len(negatives) > n_negatives_needed:
                     negatives_sampled = negatives.sample(n=n_negatives_needed, random_state=seed).reset_index(drop=True)
                 else:
                     negatives_sampled = negatives.copy()
                 
-                # Combine
                 df_combined = pd.concat([positives, negatives_sampled], ignore_index=True)
-                # Shuffle
                 df_combined = df_combined.sample(frac=1, random_state=seed).reset_index(drop=True)
         
         logger.info(f"After sampling: {len(df_combined):,} rows")
@@ -219,7 +208,6 @@ def build_xy(df: pd.DataFrame, logger: logging.Logger) -> Tuple[pd.DataFrame, pd
     Returns:
         Tuple of (X, y) where X contains only n_* and r_* columns
     """
-    # Select feature columns (n_* and r_*)
     feature_cols = [col for col in df.columns if col.startswith('n_') or col.startswith('r_')]
     
     if len(feature_cols) == 0:
@@ -228,7 +216,6 @@ def build_xy(df: pd.DataFrame, logger: logging.Logger) -> Tuple[pd.DataFrame, pd
     
     X = df[feature_cols].copy()
     
-    # Extract target
     if 'y_14' not in df.columns:
         logger.error("Column 'y_14' not found")
         return pd.DataFrame(), pd.Series()
@@ -253,14 +240,11 @@ def fit_preprocess(train_X: pd.DataFrame, logger: logging.Logger) -> Tuple[Simpl
     """
     logger.info("Fitting preprocessing transformers on training data...")
     
-    # Imputer (median strategy)
     imputer = SimpleImputer(strategy='median')
     imputer.fit(train_X)
     logger.info(f"Fitted imputer: {train_X.isna().sum().sum()} missing values in training data")
     
-    # Scaler (standardization)
     scaler = StandardScaler()
-    # First impute, then scale
     train_X_imputed = pd.DataFrame(
         imputer.transform(train_X),
         columns=train_X.columns,
@@ -296,7 +280,6 @@ def evaluate(
     Returns:
         ModelMetrics object
     """
-    # Preprocess
     X_imputed = pd.DataFrame(
         imputer.transform(X),
         columns=X.columns,
@@ -308,17 +291,13 @@ def evaluate(
         index=X.index
     )
     
-    # Get predictions
     if isinstance(model, str) and model == 'always_negative':
-        # For always-negative predictor
         y_pred_proba = np.zeros(len(y))
     else:
-        # For sklearn models
         y_pred_proba = model.predict_proba(X_scaled)[:, 1]
     
     y_pred = (y_pred_proba >= threshold).astype(int)
     
-    # Compute metrics
     metrics = ModelMetrics()
     metrics.threshold = threshold
     
@@ -332,12 +311,10 @@ def evaluate(
     except:
         metrics.roc_auc = 0.0
     
-    # Confusion matrix
     cm = confusion_matrix(y, y_pred)
     if cm.size == 4:
         metrics.tn, metrics.fp, metrics.fn, metrics.tp = cm.ravel()
     else:
-        # Handle edge cases
         if len(np.unique(y_pred)) == 1:
             if y_pred[0] == 0:
                 metrics.tn = int((y == 0).sum())
@@ -346,7 +323,6 @@ def evaluate(
                 metrics.fp = int((y == 0).sum())
                 metrics.tp = int((y == 1).sum())
     
-    # Precision, Recall, F1
     try:
         metrics.precision = precision_score(y, y_pred, zero_division=0)
         metrics.recall = recall_score(y, y_pred, zero_division=0)
@@ -383,7 +359,6 @@ def find_best_threshold(
     Returns:
         Tuple of (best_threshold, best_f1)
     """
-    # Preprocess
     X_imputed = pd.DataFrame(
         imputer.transform(X),
         columns=X.columns,
@@ -395,10 +370,8 @@ def find_best_threshold(
         index=X.index
     )
     
-    # Get probability predictions
     y_pred_proba = model.predict_proba(X_scaled)[:, 1]
     
-    # Scan thresholds
     best_threshold = 0.5
     best_f1 = 0.0
     
@@ -461,11 +434,9 @@ def train_baselines(
     if not input_experiment_dir.exists():
         raise FileNotFoundError(f"Input experiment directory not found: {input_experiment_dir}")
     
-    # Set random seed
     random.seed(seed)
     np.random.seed(seed)
     
-    # Load training data
     logger.info("Loading training data...")
     train_dir = input_experiment_dir / 'train'
     train_df = load_split_data_iterative(train_dir, max_train_rows, seed, logger)
@@ -483,7 +454,6 @@ def train_baselines(
     results.train_negatives = int((train_y == 0).sum())
     results.feature_count = len(train_X.columns)
     
-    # Compute missingness before imputation
     missing_count = train_X.isna().sum().sum()
     total_cells = len(train_X) * len(train_X.columns)
     results.missingness_before_imputation = (missing_count / total_cells * 100) if total_cells > 0 else 0.0
@@ -493,10 +463,8 @@ def train_baselines(
     logger.info(f"Missingness: {results.missingness_before_imputation:.2f}%")
     logger.info("")
     
-    # Fit preprocessing
     imputer, scaler = fit_preprocess(train_X, logger)
     
-    # Preprocess training data
     train_X_imputed = pd.DataFrame(
         imputer.transform(train_X),
         columns=train_X.columns,
@@ -508,10 +476,9 @@ def train_baselines(
         index=train_X.index
     )
     
-    # Train Logistic Regression (unbalanced)
     logger.info("Training Logistic Regression...")
     lr_model = LogisticRegression(
-        class_weight=None,  # Unbalanced - no class weighting
+        class_weight=None,
         solver='liblinear',
         max_iter=200,
         random_state=seed
@@ -520,7 +487,6 @@ def train_baselines(
     logger.info("Logistic Regression trained")
     logger.info("")
     
-    # Load validation data
     logger.info("Loading validation data...")
     val_dir = input_experiment_dir / 'val'
     val_df = load_split_data_iterative(val_dir, max_val_rows, seed, logger)
@@ -536,10 +502,9 @@ def train_baselines(
         logger.info(f"Validation data: {results.val_rows:,} rows ({results.val_positives:,} positive, {results.val_negatives:,} negative)")
         logger.info("")
         
-        # Evaluate always-negative on validation
         logger.info("Evaluating always-negative predictor on validation...")
         results.always_negative.val_metrics = evaluate(
-            'always_negative',  # Special marker for always-negative
+            'always_negative',
             val_X, val_y,
             imputer, scaler,
             threshold=0.5,
@@ -547,7 +512,6 @@ def train_baselines(
         )
         results.always_negative.val_metrics.split_name = 'val'
         
-        # Evaluate Logistic Regression on validation (threshold 0.5)
         logger.info("Evaluating Logistic Regression on validation (threshold=0.5)...")
         results.logistic_regression.val_metrics = evaluate(
             lr_model,
@@ -558,7 +522,6 @@ def train_baselines(
         )
         results.logistic_regression.val_metrics.split_name = 'val'
         
-        # Find best threshold on validation
         logger.info("Finding best threshold on validation...")
         best_threshold, best_f1 = find_best_threshold(
             lr_model,
@@ -569,7 +532,6 @@ def train_baselines(
         )
         results.logistic_regression.best_threshold = best_threshold
         
-        # Re-evaluate with best threshold
         logger.info(f"Re-evaluating Logistic Regression on validation with threshold={best_threshold:.3f}...")
         results.logistic_regression.val_metrics = evaluate(
             lr_model,
@@ -581,7 +543,6 @@ def train_baselines(
         results.logistic_regression.val_metrics.split_name = 'val'
         results.logistic_regression.val_metrics.threshold = best_threshold
     
-    # Load test data
     logger.info("Loading test data...")
     test_dir = input_experiment_dir / 'test'
     test_df = load_split_data_iterative(test_dir, max_test_rows, seed, logger)
@@ -597,10 +558,9 @@ def train_baselines(
         logger.info(f"Test data: {results.test_rows:,} rows ({results.test_positives:,} positive, {results.test_negatives:,} negative)")
         logger.info("")
         
-        # Evaluate always-negative on test
         logger.info("Evaluating always-negative predictor on test...")
         results.always_negative.test_metrics = evaluate(
-            'always_negative',  # Special marker for always-negative
+            'always_negative',
             test_X, test_y,
             imputer, scaler,
             threshold=0.5,
@@ -608,8 +568,7 @@ def train_baselines(
         )
         results.always_negative.test_metrics.split_name = 'test'
         
-        # Evaluate Logistic Regression on test
-        # Use best threshold from validation if available, otherwise 0.5
+        # Reuse the threshold tuned on validation.
         test_threshold = results.logistic_regression.best_threshold if results.logistic_regression.best_threshold is not None else 0.5
         logger.info(f"Evaluating Logistic Regression on test (threshold={test_threshold:.3f})...")
         results.logistic_regression.test_metrics = evaluate(
@@ -640,7 +599,6 @@ def write_reports(results: BaselineResults, logger: logging.Logger) -> None:
     
     experiment_name = results.experiment_name
     
-    # JSON report
     json_path = reports_dir / f"baseline_y14_results_{experiment_name}.json"
     
     report_json = {
@@ -685,7 +643,6 @@ def write_reports(results: BaselineResults, logger: logging.Logger) -> None:
         json.dump(report_json, f, indent=2, default=str)
     logger.info(f"JSON report written to {json_path}")
     
-    # Markdown report
     md_path = reports_dir / f"baseline_y14_results_{experiment_name}.md"
     with open(md_path, 'w') as f:
         f.write(f"# Baseline Model Results - {experiment_name}\n\n")
@@ -711,7 +668,6 @@ def write_reports(results: BaselineResults, logger: logging.Logger) -> None:
         
         f.write("## Model Results\n\n")
         
-        # Always-negative
         f.write("### Always-Negative Predictor\n\n")
         f.write("**Validation:**\n")
         f.write(f"- PR-AUC: {results.always_negative.val_metrics.pr_auc:.4f}\n")
@@ -730,7 +686,6 @@ def write_reports(results: BaselineResults, logger: logging.Logger) -> None:
         f.write(f"- Confusion Matrix: TN={results.always_negative.test_metrics.tn}, FP={results.always_negative.test_metrics.fp}, FN={results.always_negative.test_metrics.fn}, TP={results.always_negative.test_metrics.tp}\n")
         f.write("\n")
         
-        # Logistic Regression
         f.write("### Logistic Regression\n\n")
         if results.logistic_regression.best_threshold is not None:
             f.write(f"- **Best Threshold (from VAL):** {results.logistic_regression.best_threshold:.3f}\n\n")
@@ -800,7 +755,6 @@ def main():
     
     args = parser.parse_args()
     
-    # Load config
     config_path = Path(__file__).parent.parent / 'configs' / 'data_config.yaml'
     if not config_path.exists():
         print(f"Error: Config file not found at {config_path}")
@@ -808,17 +762,13 @@ def main():
     
     config = load_config(config_path)
     
-    # Setup logging
     log_dir = Path(config['logging']['log_dir'])
     logger = setup_logging(log_dir, config['logging']['level'], args.experiment)
     
-    # Base directory
     base_dir = Path(__file__).parent.parent
     
-    # Input directory (data_splits instead of data_ml)
     input_base_dir = base_dir / 'data_splits'
     
-    # Train baselines
     try:
         results = train_baselines(
             args.experiment,
@@ -831,7 +781,6 @@ def main():
             args.threshold_scan_step
         )
         
-        # Write reports
         write_reports(results, logger)
         
         logger.info("=" * 60)

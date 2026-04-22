@@ -133,7 +133,7 @@ def main() -> int:
 
     sample_rows = args.sample_rows if args.sample_rows is not None else 200_000
     if args.first_file:
-        sample_rows = None  # signal: use first file only
+        sample_rows = None
 
     try:
         tbl_in = read_sample_from_partition(
@@ -145,8 +145,7 @@ def main() -> int:
         print(f"ERROR: Failed to read input sample: {e}")
         return 1
 
-    # Output: same sampling strategy - if we sampled N rows from input, we need same keys from output
-    # Output is one file (data.parquet); sample it the same way for fairness
+    # Use the same sampling approach for output so the comparison is fair.
     if args.first_file:
         tbl_out = pq.read_table(output_file)
     else:
@@ -170,20 +169,19 @@ def main() -> int:
     n_in, n_out = tbl_in.num_rows, tbl_out.num_rows
     print(f"Sample: input rows={n_in}, output rows={n_out}")
 
-    # 1) For same-sample check: we sampled input; output might have more rows (full partition).
-    # So we only require that output has at least the same number of rows, or we compare keys for our sample.
+    # Output can include extra rows, but it should not have fewer than the sampled input.
     if n_in > 0 and n_out < n_in:
         print(f"FAIL: Output has fewer rows ({n_out}) than input sample ({n_in})")
         return 1
     print("OK: Row count (sample) consistent")
 
-    # 2) Required keys
+    # Required keys
     if "disk_id" not in tbl_out.schema.names or "smart_day" not in tbl_out.schema.names:
         print("FAIL: disk_id or smart_day missing in output")
         return 1
     print("OK: disk_id, smart_day present")
 
-    # 3) Engineered columns
+    # Expected engineered columns
     has_age = "age_days" in tbl_out.schema.names
     has_model_code = "model_code" in tbl_out.schema.names
     log1p_cols = [c for c in tbl_out.schema.names if c.startswith("log1p_")]
@@ -212,7 +210,7 @@ def main() -> int:
         f"delta={len(delta_cols)}, roll={len(roll_cols)}, instab={len(instab_cols)})"
     )
 
-    # 4) age_days >= 0
+    # age_days should never be negative
     if n_out > 0 and has_age:
         age = tbl_out.column("age_days")
         neg = 0
@@ -225,7 +223,7 @@ def main() -> int:
             return 1
     print("OK: age_days >= 0")
 
-    # 5) log1p_r_* finite where r_* present
+    # Spot-check that log1p values are finite where the base value exists.
     for logcol in log1p_cols[:5]:
         base_col = logcol.replace("log1p_", "")
         if base_col not in tbl_out.schema.names:
@@ -248,7 +246,7 @@ def main() -> int:
     if not log1p_cols:
         print("OK: log1p spot check skipped (no log1p columns)")
 
-    # 6) Temporal columns exist and are numeric type (NaN allowed)
+    # Basic temporal column presence check.
     for dc in delta_cols[:3]:
         print(f"OK: {dc} column present (temporal block)")
 

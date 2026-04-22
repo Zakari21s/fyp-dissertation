@@ -40,7 +40,7 @@ class SplitStats:
     rows_after_entity_filter: int = 0
     rows_dropped_date_filter: int = 0
     rows_dropped_entity_overlap: int = 0
-    rows_final: int = 0  # Same as rows_after_entity_filter
+    rows_final: int = 0
     entities_before: int = 0
     entities_after: int = 0
     date_range_min: Optional[str] = None
@@ -77,7 +77,6 @@ def setup_logging(log_dir: Path, log_level: str, experiment_name: str) -> loggin
     log_dir.mkdir(parents=True, exist_ok=True)
     log_file = log_dir / f"splits_{experiment_name}.log"
     
-    # Get root logger
     root_logger = logging.getLogger()
     root_logger.setLevel(getattr(logging, log_level.upper()))
     
@@ -173,8 +172,8 @@ def iter_partitions(input_dir: Path, logger: logging.Logger, max_partitions: Opt
     
     for partition_dir in partitions:
         # Extract partition name from path
-        year_part = partition_dir.parent.name  # e.g., "year=2018"
-        month_part = partition_dir.name  # e.g., "month=01"
+        year_part = partition_dir.parent.name
+        month_part = partition_dir.name
         partition_name = f"{year_part}/{month_part}"
         
         # Find parquet files in partition
@@ -899,7 +898,6 @@ def main():
     if args.experiment_name is None:
         args.experiment_name = f"exp_time_generalisation__{args.entity_disjoint}"
     
-    # Load config
     config_path = Path(__file__).parent.parent / 'configs' / 'data_config.yaml'
     if not config_path.exists():
         print(f"Error: Config file not found at {config_path}")
@@ -907,7 +905,6 @@ def main():
     
     config = load_config(config_path)
     
-    # Setup logging (experiment_name needed for log filename)
     log_dir = Path(config['logging']['log_dir'])
     logger = setup_logging(log_dir, config['logging']['level'], args.experiment_name)
     

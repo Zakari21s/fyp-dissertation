@@ -32,7 +32,6 @@ def parse_datetime_column(df: pd.DataFrame, column: str, logger: logging.Logger)
     
     parsed_series = None
     
-    # Step 1: Try pandas with UTC and infer_datetime_format
     try:
         parsed = pd.to_datetime(df[column], errors='coerce', utc=True, infer_datetime_format=True)
         success_count = parsed.notna().sum()
@@ -48,7 +47,6 @@ def parse_datetime_column(df: pd.DataFrame, column: str, logger: logging.Logger)
     except Exception as e:
         logger.debug(f"pandas infer_datetime_format with UTC failed: {e}")
     
-    # Step 2: If parse rate < 0.95, try specific formats
     if parsed_series is None or parsed_series.notna().sum() / len(df) < 0.95:
         specific_formats = [
             '%Y%m%d',                    # 20190322
@@ -80,7 +78,6 @@ def parse_datetime_column(df: pd.DataFrame, column: str, logger: logging.Logger)
         if best_parsed is not None and best_success > (parsed_series.notna().sum() if parsed_series is not None else 0):
             parsed_series = best_parsed
     
-    # Step 3: If still low success rate, try Unix timestamps
     if parsed_series is None or parsed_series.notna().sum() / len(df) < 0.95:
         try:
             numeric_vals = pd.to_numeric(df[column], errors='coerce')
@@ -94,8 +91,8 @@ def parse_datetime_column(df: pd.DataFrame, column: str, logger: logging.Logger)
                     
                     # Try seconds (10 digits) - Unix timestamp range: 2000-01-01 to 2100-01-01
                     if (digit_lengths == 10).any():
-                        min_ts = 946684800  # 2000-01-01
-                        max_ts = 4102444800  # 2100-01-01
+                        min_ts = 946684800
+                        max_ts = 4102444800
                         
                         # Create mask for valid range
                         valid_mask = (numeric_vals >= min_ts) & (numeric_vals <= max_ts) & numeric_vals.notna()
@@ -115,8 +112,8 @@ def parse_datetime_column(df: pd.DataFrame, column: str, logger: logging.Logger)
                     
                     # Try milliseconds (13 digits)
                     if (digit_lengths == 13).any():
-                        min_ts_ms = 946684800000  # 2000-01-01
-                        max_ts_ms = 4102444800000  # 2100-01-01
+                        min_ts_ms = 946684800000
+                        max_ts_ms = 4102444800000
                         
                         # Create mask for valid range
                         valid_mask = (numeric_vals >= min_ts_ms) & (numeric_vals <= max_ts_ms) & numeric_vals.notna()
@@ -329,7 +326,6 @@ def main():
     parser = argparse.ArgumentParser(description='Prepare and deduplicate failure labels')
     args = parser.parse_args()
     
-    # Load config
     config_path = Path(__file__).parent.parent / 'configs' / 'data_config.yaml'
     if not config_path.exists():
         print(f"Error: Config file not found at {config_path}")
@@ -337,7 +333,6 @@ def main():
     
     config = load_config(config_path)
     
-    # Setup logging
     log_level = config.get('logging', {}).get('level', 'INFO')
     logger = setup_logging(log_level)
     

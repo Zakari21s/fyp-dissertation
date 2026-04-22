@@ -39,12 +39,12 @@ class SplitMLStats:
     unique_entities: int = 0
     date_range_min: Optional[str] = None
     date_range_max: Optional[str] = None
-    missingness_n_features: float = 0.0  # Overall % missing for n_* features
-    missingness_r_features: float = 0.0  # Overall % missing for r_* features
-    n_missing_total: int = 0  # Internal: total missing cells for n_*
-    n_cells_total: int = 0  # Internal: total cells for n_*
-    r_missing_total: int = 0  # Internal: total missing cells for r_*
-    r_cells_total: int = 0  # Internal: total cells for r_*
+    missingness_n_features: float = 0.0
+    missingness_r_features: float = 0.0
+    n_missing_total: int = 0
+    n_cells_total: int = 0
+    r_missing_total: int = 0
+    r_cells_total: int = 0
 
 
 @dataclass
@@ -68,7 +68,6 @@ def setup_logging(log_dir: Path, log_level: str, experiment_name: str) -> loggin
     log_dir.mkdir(parents=True, exist_ok=True)
     log_file = log_dir / f"ml_tabular_y30_{experiment_name}.log"
     
-    # Get root logger
     root_logger = logging.getLogger()
     root_logger.setLevel(getattr(logging, log_level.upper()))
     
@@ -119,8 +118,8 @@ def iter_partitions(input_dir: Path, logger: logging.Logger, max_partitions: Opt
     
     for partition_dir in partitions:
         # Extract partition name from path
-        year_part = partition_dir.parent.name  # e.g., "year=2018"
-        month_part = partition_dir.name  # e.g., "month=01"
+        year_part = partition_dir.parent.name
+        month_part = partition_dir.name
         partition_name = f"{year_part}/{month_part}"
         
         yield partition_dir, partition_name
@@ -225,12 +224,12 @@ def compute_stats_update(
         valid_mask = df['disk_id'].notna() & df['model'].notna()
         valid_df = df[valid_mask]
         if len(valid_df) > 0:
-            # Count unique entities (we'll aggregate this later)
+            # Final unique counts are computed after all partitions are processed.
             entities = set(zip(
                 valid_df['disk_id'].astype(str),
                 valid_df['model'].astype(str)
             ))
-            # Note: We'll compute final unique count after processing all partitions
+            
     
     # Date range
     if 'smart_day' in df.columns:
@@ -364,9 +363,9 @@ def process_split(
                 
                 # Ensure disk_id is consistent type (prefer int, but keep as-is if needed)
                 if 'disk_id' in df_selected.columns:
-                    # Try to convert to int if possible, otherwise keep as string
+                    # Keep IDs stable even when some partitions store them as strings.
                     try:
-                        df_selected['disk_id'] = df_selected['disk_id'].astype('Int64')  # Nullable int
+                        df_selected['disk_id'] = df_selected['disk_id'].astype('Int64')
                     except:
                         # Keep as string if conversion fails
                         df_selected['disk_id'] = df_selected['disk_id'].astype(str)
@@ -670,7 +669,6 @@ def main():
     
     args = parser.parse_args()
     
-    # Load config
     config_path = Path(__file__).parent.parent / 'configs' / 'data_config.yaml'
     if not config_path.exists():
         print(f"Error: Config file not found at {config_path}")
@@ -678,7 +676,6 @@ def main():
     
     config = load_config(config_path)
     
-    # Setup logging
     log_dir = Path(config['logging']['log_dir'])
     logger = setup_logging(log_dir, config['logging']['level'], args.experiment)
     
