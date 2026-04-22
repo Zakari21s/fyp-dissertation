@@ -64,7 +64,6 @@ Reports are organized by domain/model family:
 ### Install
 
 ```bash
-cd "/Users/slimanizakaria/Desktop/FYP-CODE"
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -144,7 +143,6 @@ Typical workflow from raw logs to final reports:
 Run scripts from repository root:
 
 ```bash
-cd "/Users/slimanizakaria/Desktop/FYP-CODE"
 source .venv/bin/activate
 
 python src/audit_raw.py
