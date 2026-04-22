@@ -1,0 +1,108 @@
+# Feature engineering summary – exp_time_generalisation__train_eval / train
+
+- **Rows read (partition totals):** 5,476,307
+- **Rows written:** 5,000,000
+- **Partitions processed:** 12
+- **Engineered columns:** 92
+- **Row cap:** 5000000
+- **Sort partitions (temporal correctness):** True
+- **age_days min / max / mean:** 0.0 / 187.0 / 86.4195034
+
+## age_days
+
+age_days = (smart_day.date() - first_seen[disk]).days >= 0; first_seen is global min smart_day per disk over this split, merged with train JSON for val/test.
+
+## Engineered columns
+
+- age_days
+- model_code
+- log1p_r_175
+- log1p_r_190
+- log1p_r_241
+- log1p_r_1
+- log1p_r_173
+- log1p_r_242
+- log1p_r_9
+- log1p_r_196
+- log1p_r_195
+- log1p_r_170
+- log1p_r_194
+- log1p_r_177
+- log1p_r_5
+- log1p_r_183
+- log1p_r_12
+- delta1_log1p_r_175
+- delta7_log1p_r_175
+- rollmean7_log1p_r_175
+- rollstd7_log1p_r_175
+- instab_log1p_r_175
+- delta1_log1p_r_190
+- delta7_log1p_r_190
+- rollmean7_log1p_r_190
+- rollstd7_log1p_r_190
+- instab_log1p_r_190
+- delta1_log1p_r_241
+- delta7_log1p_r_241
+- rollmean7_log1p_r_241
+- rollstd7_log1p_r_241
+- instab_log1p_r_241
+- delta1_log1p_r_1
+- delta7_log1p_r_1
+- rollmean7_log1p_r_1
+- rollstd7_log1p_r_1
+- instab_log1p_r_1
+- delta1_log1p_r_173
+- delta7_log1p_r_173
+- rollmean7_log1p_r_173
+- rollstd7_log1p_r_173
+- instab_log1p_r_173
+- delta1_log1p_r_242
+- delta7_log1p_r_242
+- rollmean7_log1p_r_242
+- rollstd7_log1p_r_242
+- instab_log1p_r_242
+- delta1_log1p_r_9
+- delta7_log1p_r_9
+- rollmean7_log1p_r_9
+- rollstd7_log1p_r_9
+- instab_log1p_r_9
+- delta1_log1p_r_196
+- delta7_log1p_r_196
+- rollmean7_log1p_r_196
+- rollstd7_log1p_r_196
+- instab_log1p_r_196
+- delta1_log1p_r_195
+- delta7_log1p_r_195
+- rollmean7_log1p_r_195
+- rollstd7_log1p_r_195
+- instab_log1p_r_195
+- delta1_log1p_r_170
+- delta7_log1p_r_170
+- rollmean7_log1p_r_170
+- rollstd7_log1p_r_170
+- instab_log1p_r_170
+- delta1_log1p_r_194
+- delta7_log1p_r_194
+- rollmean7_log1p_r_194
+- rollstd7_log1p_r_194
+- instab_log1p_r_194
+- delta1_log1p_r_177
+- delta7_log1p_r_177
+- rollmean7_log1p_r_177
+- rollstd7_log1p_r_177
+- instab_log1p_r_177
+- delta1_log1p_r_5
+- delta7_log1p_r_5
+- rollmean7_log1p_r_5
+- rollstd7_log1p_r_5
+- instab_log1p_r_5
+- delta1_log1p_r_183
+- delta7_log1p_r_183
+- rollmean7_log1p_r_183
+- rollstd7_log1p_r_183
+- instab_log1p_r_183
+- delta1_log1p_r_12
+- delta7_log1p_r_12
+- rollmean7_log1p_r_12
+- rollstd7_log1p_r_12
+- instab_log1p_r_12

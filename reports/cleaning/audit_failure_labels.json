@@ -1,0 +1,42 @@
+{
+  "audit_timestamp": "2026-02-05T16:59:34.129908",
+  "result": {
+    "file_path": "data_raw/ssd_failure_label.csv",
+    "row_count": 16305,
+    "columns": [
+      "model",
+      "failure_time",
+      "disk_id"
+    ],
+    "dtypes": {
+      "model": "str",
+      "failure_time": "str",
+      "disk_id": "int64"
+    },
+    "missingness": {
+      "model": 0.0,
+      "failure_time": 0.0,
+      "disk_id": 0.0
+    },
+    "duplicate_disk_ids": 482,
+    "duplicate_rate": 2.9561484207298374,
+    "datetime_parse_success_rate": 100.0,
+    "datetime_column": "failure_time",
+    "datetime_formats_tried": [
+      "%Y%m%d",
+      "%Y-%m-%d",
+      "%Y/%m/%d",
+      "%Y%m%d%H%M%S",
+      "%Y-%m-%d %H:%M:%S"
+    ],
+    "datetime_format_used": "%Y-%m-%d %H:%M:%S",
+    "inferred_format": "%Y-%m-%d %H:%M:%S",
+    "min_failure_date": "2018-01-02 19:15:32",
+    "max_failure_date": "2019-12-31 22:58:47",
+    "unparsed_examples": [],
+    "unique_disks_with_failures": 15823,
+    "disk_id_column": "disk_id",
+    "error": null,
+    "processing_time_seconds": 0.03993
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "dataset": "smartlog2019ssd",
+  "timestamp": "2026-02-06T01:33:49.512735",
+  "output_directory": "data_clean/labeled_smartlog2019ssd",
+  "statistics": {
+    "total_input_rows": 136922851,
+    "total_output_rows": 128776521,
+    "rows_dropped_ds_parse_failure": 0,
+    "rows_dropped_missing_disk_id": 0,
+    "rows_dropped_post_failure": 8146330,
+    "unique_disks_processed": 193739,
+    "rows_with_failure_date": "5129653",
+    "label_counts": {
+      "7": {
+        "pos": 191529,
+        "neg": 128584992
+      },
+      "14": {
+        "pos": 365234,
+        "neg": 128411287
+      },
+      "30": {
+        "pos": 748448,
+        "neg": 128028073
+      }
+    },
+    "min_smart_day": "2019-01-01",
+    "max_smart_day": "2019-12-31",
+    "files_processed": 354,
+    "files_failed": 1,
+    "processing_time_seconds": 6897.412998
+  }
+}

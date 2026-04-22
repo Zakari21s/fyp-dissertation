@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+
+# Python environment/cache
+.venv/
+__pycache__/
+*.py[cod]
+
+# Local secrets (if you add any later)
+.env
+.env.*
+
+# Run artifacts
+logs/*.log
+
+# Very large raw data folders (keep label CSV in data_raw root)
+data_raw/smartlog2018ssd/
+data_raw/smartlog2019ssd/
+
+# Generated data artifacts (reproducible from scripts)
+data_clean/
+data_interim/
+data_engineered/
+data_ml/
+data_splits/
+
+# Safety net for parquet artifacts anywhere
+*.parquet

@@ -1,0 +1,35 @@
+data_raw_dir: "data_raw"
+
+datasets:
+  smartlog2018ssd:
+    year: 2018
+    path: "smartlog2018ssd"
+  smartlog2019ssd:
+    year: 2019
+    path: "smartlog2019ssd"
+
+labels:
+  failure_label_file: "ssd_failure_label.csv"
+
+file_pattern: "*.csv"
+
+key_columns:
+  serial_number: "serial_number"   # adjust after audit
+  date: "date"                     # adjust after audit
+  model: "model"                   # optional
+
+logging:
+  level: "INFO"
+  log_dir: "logs"
+
+processing:
+  chunk_size: 500_000
+
+missingness:
+  batch_size: 250000
+  min_feature_coverage: 0.01
+  drop_constant_features: true
+  enable_row_filter: false
+  min_features_per_row: 5
+  enable_missing_indicators: false
+  indicators_top_k: 20

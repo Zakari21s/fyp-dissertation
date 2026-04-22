@@ -1,0 +1,103 @@
+{
+  "experiment_name": "exp_time_generalisation__train_eval",
+  "train_dataset": "smartlog2018ssd",
+  "eval_dataset": "smartlog2019ssd",
+  "entity_disjoint_policy": "train_eval",
+  "timestamp": "2026-02-12T02:42:00.437952",
+  "time_windows": {
+    "train": {
+      "start": "2018-01-01",
+      "end": "2018-12-31"
+    },
+    "val": {
+      "start": "2019-01-01",
+      "end": "2019-06-30"
+    },
+    "test": {
+      "start": "2019-07-01",
+      "end": "2019-12-31"
+    }
+  },
+  "input_rows_total": 262335632,
+  "splits": {
+    "train": {
+      "rows_before": 133559111,
+      "rows_after_date_filter": 133559111,
+      "rows_after_entity_filter": 6953558,
+      "rows_dropped_date_filter": 0,
+      "rows_dropped_entity_overlap": 126605553,
+      "rows_final": 6953558,
+      "entities_before": 455294,
+      "entities_after": 35773,
+      "date_range_min": "2018-01-01 00:00:00",
+      "date_range_max": "2018-12-31 00:00:00",
+      "label_counts": {
+        "y_7": {
+          "positive": 141943,
+          "negative": 6811615
+        },
+        "y_14": {
+          "positive": 260956,
+          "negative": 6692602
+        },
+        "y_30": {
+          "positive": 541384,
+          "negative": 6412174
+        }
+      }
+    },
+    "val": {
+      "rows_before": 68739587,
+      "rows_after_date_filter": 68739587,
+      "rows_after_entity_filter": 68739587,
+      "rows_dropped_date_filter": 0,
+      "rows_dropped_entity_overlap": 0,
+      "rows_final": 68739587,
+      "entities_before": 425951,
+      "entities_after": 425951,
+      "date_range_min": "2019-01-01 00:00:00",
+      "date_range_max": "2019-06-30 00:00:00",
+      "label_counts": {
+        "y_7": {
+          "positive": 87835,
+          "negative": 68651752
+        },
+        "y_14": {
+          "positive": 169420,
+          "negative": 68570167
+        },
+        "y_30": {
+          "positive": 356070,
+          "negative": 68383517
+        }
+      }
+    },
+    "test": {
+      "rows_before": 60036934,
+      "rows_after_date_filter": 60036934,
+      "rows_after_entity_filter": 60036934,
+      "rows_dropped_date_filter": 0,
+      "rows_dropped_entity_overlap": 0,
+      "rows_final": 60036934,
+      "entities_before": 395032,
+      "entities_after": 395032,
+      "date_range_min": "2019-07-01 00:00:00",
+      "date_range_max": "2019-12-31 00:00:00",
+      "label_counts": {
+        "y_7": {
+          "positive": 103694,
+          "negative": 59933240
+        },
+        "y_14": {
+          "positive": 195814,
+          "negative": 59841120
+        },
+        "y_30": {
+          "positive": 392378,
+          "negative": 59644556
+        }
+      }
+    }
+  },
+  "processing_time_seconds": 1594.16572
+}

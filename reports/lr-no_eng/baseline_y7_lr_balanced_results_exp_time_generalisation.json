@@ -1,0 +1,88 @@
+{
+  "experiment_name": "exp_time_generalisation",
+  "timestamp": "2026-02-12T16:43:44.093673",
+  "label_column": "y_7",
+  "class_weight": "balanced",
+  "data_summary": {
+    "train": {
+      "rows": 5000000,
+      "positives": 2459,
+      "negatives": 4997541
+    },
+    "val": {
+      "rows": 2000000,
+      "positives": 14878,
+      "negatives": 1985122
+    },
+    "test": {
+      "rows": 2000000,
+      "positives": 18328,
+      "negatives": 1981672
+    }
+  },
+  "feature_info": {
+    "feature_count": 55,
+    "missingness_before_imputation_pct": 40.52691381818182
+  },
+  "models": {
+    "always_negative": {
+      "val": {
+        "split_name": "val",
+        "pr_auc": 0.007439,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": "1985122",
+        "fp": "0",
+        "fn": "14878",
+        "tp": "0"
+      },
+      "test": {
+        "split_name": "test",
+        "pr_auc": 0.009164,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": "1981672",
+        "fp": "0",
+        "fn": "18328",
+        "tp": "0"
+      }
+    },
+    "logistic_regression": {
+      "class_weight": "balanced",
+      "best_threshold": 0.78,
+      "val": {
+        "split_name": "val",
+        "pr_auc": 0.014319650082911407,
+        "roc_auc": 0.5850149158264224,
+        "threshold": 0.78,
+        "precision": 0.05901715077669342,
+        "recall": 0.0686920284984541,
+        "f1": 0.06348811927317906,
+        "tn": "1968827",
+        "fp": "16295",
+        "fn": "13856",
+        "tp": "1022"
+      },
+      "test": {
+        "split_name": "test",
+        "pr_auc": 0.009617822463066052,
+        "roc_auc": 0.501365836018766,
+        "threshold": 0.78,
+        "precision": 0.012634424399130281,
+        "recall": 0.01173068529026626,
+        "f1": 0.012165794313198473,
+        "tn": "1964870",
+        "fp": "16802",
+        "fn": "18113",
+        "tp": "215"
+      }
+    }
+  },
+  "processing_time_seconds": 1107.676905
+}

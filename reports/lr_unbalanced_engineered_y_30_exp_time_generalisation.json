@@ -1,0 +1,95 @@
+{
+  "experiment_name": "exp_time_generalisation",
+  "timestamp": "2026-04-10T03:34:26.991292",
+  "label_column": "y_30",
+  "data_source": "data_engineered",
+  "class_weight": "balanced",
+  "feature_policy": "n_star_r_star_plus_engineered_only",
+  "row_cap_policy": "keep_all_positives_sample_negatives_shuffle",
+  "data_summary": {
+    "train": {
+      "rows": 5000000,
+      "positives": 4516,
+      "negatives": 4995484
+    },
+    "val": {
+      "rows": 2000000,
+      "positives": 9738,
+      "negatives": 1990262
+    },
+    "test": {
+      "rows": 2000000,
+      "positives": 13708,
+      "negatives": 1986292
+    }
+  },
+  "feature_info": {
+    "feature_count": 147,
+    "missingness_before_imputation_pct": 45.6894518367347
+  },
+  "models": {
+    "always_negative": {
+      "val": {
+        "split_name": "val",
+        "accuracy": 0.995131,
+        "pr_auc": 0.004869,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": 1990262,
+        "fp": 0,
+        "fn": 9738,
+        "tp": 0
+      },
+      "test": {
+        "split_name": "test",
+        "accuracy": 0.993146,
+        "pr_auc": 0.006854,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": 1986292,
+        "fp": 0,
+        "fn": 13708,
+        "tp": 0
+      }
+    },
+    "logistic_regression": {
+      "class_weight": "balanced",
+      "best_threshold": 0.4,
+      "val": {
+        "split_name": "val",
+        "accuracy": 0.985986,
+        "pr_auc": 0.00581427030061908,
+        "roc_auc": 0.5779865967457163,
+        "threshold": 0.4,
+        "precision": 0.0020148115878893488,
+        "recall": 0.003799548161840214,
+        "f1": 0.0026332645363319335,
+        "tn": 1971935,
+        "fp": 18327,
+        "fn": 9701,
+        "tp": 37
+      },
+      "test": {
+        "split_name": "test",
+        "accuracy": 0.984738,
+        "pr_auc": 0.006447147226519413,
+        "roc_auc": 0.48382303089956913,
+        "threshold": 0.4,
+        "precision": 0.0028970083954120845,
+        "recall": 0.0035745550043770062,
+        "f1": 0.003200313500097969,
+        "tn": 1969427,
+        "fp": 16865,
+        "fn": 13659,
+        "tp": 49
+      }
+    }
+  },
+  "processing_time_seconds": 29414.538977
+}

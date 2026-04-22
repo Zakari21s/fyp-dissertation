@@ -1,0 +1,171 @@
+{
+  "experiment_name": "exp_time_generalisation",
+  "timestamp": "2026-04-10T16:25:04.166506",
+  "model": "random_forest",
+  "label_column": "y_30",
+  "data_source": "data_engineered",
+  "class_weight": "balanced",
+  "random_forest_hyperparameters": {
+    "n_estimators": 200,
+    "max_depth": null,
+    "min_samples_leaf": 1,
+    "n_jobs": -1
+  },
+  "feature_set": "baseline",
+  "feature_policy": "column_matches_feature_set (shared with LR runner)",
+  "feature_names": [
+    "n_1",
+    "n_12",
+    "n_170",
+    "n_171",
+    "n_172",
+    "n_173",
+    "n_175",
+    "n_177",
+    "n_180",
+    "n_181",
+    "n_182",
+    "n_183",
+    "n_184",
+    "n_187",
+    "n_190",
+    "n_194",
+    "n_195",
+    "n_196",
+    "n_199",
+    "n_232",
+    "n_233",
+    "n_241",
+    "n_242",
+    "n_5",
+    "n_9",
+    "r_1",
+    "r_12",
+    "r_170",
+    "r_171",
+    "r_172",
+    "r_173",
+    "r_174",
+    "r_175",
+    "r_177",
+    "r_180",
+    "r_181",
+    "r_182",
+    "r_183",
+    "r_184",
+    "r_187",
+    "r_188",
+    "r_190",
+    "r_192",
+    "r_194",
+    "r_195",
+    "r_196",
+    "r_197",
+    "r_198",
+    "r_199",
+    "r_206",
+    "r_241",
+    "r_242",
+    "r_244",
+    "r_5",
+    "r_9"
+  ],
+  "row_cap_policy": "keep_all_positives_sample_negatives_shuffle",
+  "preprocessing": "SimpleImputer(median) + StandardScaler (same as LR engineered runner)",
+  "train_negative_downsampling": {
+    "enabled": true,
+    "negatives_per_positive_requested": 2,
+    "train_pool_before_downsample": {
+      "rows": 5000000,
+      "positives": 4516,
+      "negatives": 4995484
+    },
+    "note": "Train rows after downsampling are in data_summary.train (used for RF fit). Val/test unchanged."
+  },
+  "data_summary": {
+    "train": {
+      "rows": 13548,
+      "positives": 4516,
+      "negatives": 9032
+    },
+    "val": {
+      "rows": 2000000,
+      "positives": 9738,
+      "negatives": 1990262
+    },
+    "test": {
+      "rows": 2000000,
+      "positives": 13708,
+      "negatives": 1986292
+    }
+  },
+  "feature_info": {
+    "feature_count": 55,
+    "missingness_before_imputation_pct": 44.05615052204955
+  },
+  "models": {
+    "always_negative": {
+      "val": {
+        "split_name": "val",
+        "accuracy": 0.995131,
+        "pr_auc": 0.004869,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": 1990262,
+        "fp": 0,
+        "fn": 9738,
+        "tp": 0
+      },
+      "test": {
+        "split_name": "test",
+        "accuracy": 0.993146,
+        "pr_auc": 0.006854,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": 1986292,
+        "fp": 0,
+        "fn": 13708,
+        "tp": 0
+      }
+    },
+    "random_forest": {
+      "class_weight": "balanced",
+      "best_threshold": 0.53,
+      "val": {
+        "split_name": "val",
+        "accuracy": 0.9920415,
+        "pr_auc": 0.00933802286000926,
+        "roc_auc": 0.5644894101105538,
+        "threshold": 0.53,
+        "precision": 0.04182114785703693,
+        "recall": 0.02895871842267406,
+        "f1": 0.03422122444026455,
+        "tn": 1983801,
+        "fp": 6461,
+        "fn": 9456,
+        "tp": 282
+      },
+      "test": {
+        "split_name": "test",
+        "accuracy": 0.9900025,
+        "pr_auc": 0.006877253096715379,
+        "roc_auc": 0.501660882411421,
+        "threshold": 0.53,
+        "precision": 0.00875136740115643,
+        "recall": 0.004085205719288007,
+        "f1": 0.005570199433033272,
+        "tn": 1979949,
+        "fp": 6343,
+        "fn": 13652,
+        "tp": 56
+      }
+    }
+  },
+  "processing_time_seconds": 38.326636
+}

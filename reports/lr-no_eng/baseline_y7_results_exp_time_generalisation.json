@@ -1,0 +1,85 @@
+{
+  "experiment_name": "exp_time_generalisation",
+  "timestamp": "2026-02-12T16:09:14.874523",
+  "data_summary": {
+    "train": {
+      "rows": 5000000,
+      "positives": 2459,
+      "negatives": 4997541
+    },
+    "val": {
+      "rows": 2000000,
+      "positives": 14878,
+      "negatives": 1985122
+    },
+    "test": {
+      "rows": 2000000,
+      "positives": 18328,
+      "negatives": 1981672
+    }
+  },
+  "feature_info": {
+    "feature_count": 55,
+    "missingness_before_imputation_pct": 40.52691381818182
+  },
+  "models": {
+    "always_negative": {
+      "val": {
+        "split_name": "val",
+        "pr_auc": 0.007439,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": "1985122",
+        "fp": "0",
+        "fn": "14878",
+        "tp": "0"
+      },
+      "test": {
+        "split_name": "test",
+        "pr_auc": 0.009164,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": "1981672",
+        "fp": "0",
+        "fn": "18328",
+        "tp": "0"
+      }
+    },
+    "logistic_regression": {
+      "best_threshold": 0.01,
+      "val": {
+        "split_name": "val",
+        "pr_auc": 0.024083110416018867,
+        "roc_auc": 0.5872170246631652,
+        "threshold": 0.01,
+        "precision": 0.25517241379310346,
+        "recall": 0.007460680198951472,
+        "f1": 0.014497485796382159,
+        "tn": "1984798",
+        "fp": "324",
+        "fn": "14767",
+        "tp": "111"
+      },
+      "test": {
+        "split_name": "test",
+        "pr_auc": 0.009522103403072931,
+        "roc_auc": 0.4960190382587243,
+        "threshold": 0.01,
+        "precision": 0.0038071065989847717,
+        "recall": 0.00016368398079441291,
+        "f1": 0.00031387319522912746,
+        "tn": "1980887",
+        "fp": "785",
+        "fn": "18325",
+        "tp": "3"
+      }
+    }
+  },
+  "processing_time_seconds": 261.957761
+}

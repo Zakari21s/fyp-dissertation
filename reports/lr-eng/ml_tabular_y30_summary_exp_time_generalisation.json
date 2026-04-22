@@ -1,0 +1,59 @@
+{
+  "experiment_name": "exp_time_generalisation",
+  "timestamp": "2026-02-12T03:50:12.775216",
+  "target_label": "y_30",
+  "splits": {
+    "train": {
+      "rows_in": 133559111,
+      "rows_out": 133559111,
+      "rows_dropped_missing_y30": 0,
+      "partitions_processed": 12,
+      "files_processed": 12,
+      "files_failed": 0,
+      "label_distribution": {
+        "positive": 567799,
+        "negative": 132991312
+      },
+      "unique_entities": 455294,
+      "date_range_min": "2018-01-01 00:00:00",
+      "date_range_max": "2018-12-31 00:00:00",
+      "missingness_n_features_pct": 37.83201869320619,
+      "missingness_r_features_pct": 36.749027103063
+    },
+    "val": {
+      "rows_in": 68739587,
+      "rows_out": 68739587,
+      "rows_dropped_missing_y30": 0,
+      "partitions_processed": 6,
+      "files_processed": 6,
+      "files_failed": 0,
+      "label_distribution": {
+        "positive": 356070,
+        "negative": 68383517
+      },
+      "unique_entities": 425951,
+      "date_range_min": "2019-01-01 00:00:00",
+      "date_range_max": "2019-06-30 00:00:00",
+      "missingness_n_features_pct": 37.31256232307593,
+      "missingness_r_features_pct": 35.63809555620402
+    },
+    "test": {
+      "rows_in": 60036934,
+      "rows_out": 60036934,
+      "rows_dropped_missing_y30": 0,
+      "partitions_processed": 6,
+      "files_processed": 6,
+      "files_failed": 0,
+      "label_distribution": {
+        "positive": 392378,
+        "negative": 59644556
+      },
+      "unique_entities": 395032,
+      "date_range_min": "2019-07-01 00:00:00",
+      "date_range_max": "2019-12-31 00:00:00",
+      "missingness_n_features_pct": 37.340929368578344,
+      "missingness_r_features_pct": 35.30182709419061
+    }
+  },
+  "processing_time_seconds": 1073.847669
+}

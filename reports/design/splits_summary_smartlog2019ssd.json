@@ -1,0 +1,79 @@
+{
+  "dataset": "smartlog2019ssd",
+  "train_dataset": "smartlog2018ssd",
+  "eval_dataset": "smartlog2019ssd",
+  "timestamp": "2026-02-12T00:36:15.855527",
+  "input_rows_total": 262335632,
+  "splits": {
+    "train": {
+      "rows_before_overlap_removal": 133559111,
+      "rows_removed_overlap": 126605553,
+      "rows_final": 6953558,
+      "entities_before": 455294,
+      "entities_after": 35773,
+      "date_range_min": "2018-01-01 00:00:00",
+      "date_range_max": "2018-12-31 00:00:00",
+      "label_counts": {
+        "y_7": {
+          "positive": 141943,
+          "negative": 6811615
+        },
+        "y_14": {
+          "positive": 260956,
+          "negative": 6692602
+        },
+        "y_30": {
+          "positive": 541384,
+          "negative": 6412174
+        }
+      }
+    },
+    "val": {
+      "rows_before_overlap_removal": 68739587,
+      "rows_removed_overlap": 64833340,
+      "rows_final": 3906247,
+      "entities_before": 425951,
+      "entities_after": 42085,
+      "date_range_min": "2019-01-01 00:00:00",
+      "date_range_max": "2019-06-30 00:00:00",
+      "label_counts": {
+        "y_7": {
+          "positive": 85310,
+          "negative": 3820937
+        },
+        "y_14": {
+          "positive": 160082,
+          "negative": 3746165
+        },
+        "y_30": {
+          "positive": 317158,
+          "negative": 3589089
+        }
+      }
+    },
+    "test": {
+      "rows_before_overlap_removal": 60036934,
+      "rows_removed_overlap": 0,
+      "rows_final": 60036934,
+      "entities_before": 395032,
+      "entities_after": 395032,
+      "date_range_min": "2019-07-01 00:00:00",
+      "date_range_max": "2019-12-31 00:00:00",
+      "label_counts": {
+        "y_7": {
+          "positive": 103694,
+          "negative": 59933240
+        },
+        "y_14": {
+          "positive": 195814,
+          "negative": 59841120
+        },
+        "y_30": {
+          "positive": 392378,
+          "negative": 59644556
+        }
+      }
+    }
+  },
+  "processing_time_seconds": 1263.249695
+}

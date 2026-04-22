@@ -1,0 +1,1118 @@
+{
+  "dataset": "smartlog2018ssd",
+  "stage": 5,
+  "timestamp": "2026-02-06T17:35:38.959406",
+  "statistics": {
+    "total_rows": 133559111,
+    "total_partitions": 12,
+    "partitions_processed": 12,
+    "partitions_failed": 0,
+    "smart_features_analyzed": 55,
+    "features_with_negatives": 0,
+    "features_with_extreme_skew": 7,
+    "features_with_heavy_tails": 15,
+    "processing_time_seconds": 1792.196828,
+    "feature_stats": {
+      "n_1": {
+        "feature_name": "n_1",
+        "count": 68034831,
+        "min_val": 95.0,
+        "max_val": 130.0,
+        "mean": 105.18341014178458,
+        "std": 11.341733152052866,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 100.0,
+          "1.0": 100.0,
+          "99.0": 130.0,
+          "99.9": 130.0
+        }
+      },
+      "n_12": {
+        "feature_name": "n_12",
+        "count": 129908342,
+        "min_val": 68.0,
+        "max_val": 100.0,
+        "mean": 99.79121479358115,
+        "std": 0.4106551647585791,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 99.0,
+          "1.0": 99.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_170": {
+        "feature_name": "n_170",
+        "count": 94206249,
+        "min_val": 0.0,
+        "max_val": 100.0,
+        "mean": 99.91182378994837,
+        "std": 1.0992962362173597,
+        "zero_count": 42,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 4.458302973086212e-05,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 81.0,
+          "1.0": 99.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_171": {
+        "feature_name": "n_171",
+        "count": 102814234,
+        "min_val": 1.0,
+        "max_val": 100.0,
+        "mean": 99.98503551560769,
+        "std": 1.0465713873126323,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 99.0,
+          "1.0": 100.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_172": {
+        "feature_name": "n_172",
+        "count": 102814219,
+        "min_val": 66.0,
+        "max_val": 100.0,
+        "mean": 99.99903455960697,
+        "std": 0.10309340172799925,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 100.0,
+          "1.0": 100.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_173": {
+        "feature_name": "n_173",
+        "count": 68032443,
+        "min_val": 1.0,
+        "max_val": 100.0,
+        "mean": 95.22991129393957,
+        "std": 13.490859197230234,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 1.0,
+          "1.0": 25.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_175": {
+        "feature_name": "n_175",
+        "count": 49680548,
+        "min_val": 1.0,
+        "max_val": 100.0,
+        "mean": 99.91147688225983,
+        "std": 2.95904584518431,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 100.0,
+          "1.0": 100.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_177": {
+        "feature_name": "n_177",
+        "count": 27094150,
+        "min_val": 54.0,
+        "max_val": 100.0,
+        "mean": 98.62599989296582,
+        "std": 0.9700161666753424,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 90.0,
+          "1.0": 95.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_180": {
+        "feature_name": "n_180",
+        "count": 95129283,
+        "min_val": 0.0,
+        "max_val": 130.0,
+        "mean": 44.5309009109214,
+        "std": 54.320110700329344,
+        "zero_count": 56280056,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 59.16165267428748,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 130.0,
+          "99.9": 130.0
+        }
+      },
+      "n_181": {
+        "feature_name": "n_181",
+        "count": 27094122,
+        "min_val": 80.0,
+        "max_val": 100.0,
+        "mean": 99.95983940723379,
+        "std": 0.6688006507331292,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 86.0,
+          "1.0": 100.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_182": {
+        "feature_name": "n_182",
+        "count": 27094169,
+        "min_val": 83.0,
+        "max_val": 100.0,
+        "mean": 99.99846911710044,
+        "std": 0.10924668150189228,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 100.0,
+          "1.0": 100.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_183": {
+        "feature_name": "n_183",
+        "count": 121300506,
+        "min_val": 51.0,
+        "max_val": 100.0,
+        "mean": 99.98971415667467,
+        "std": 0.3454792027266778,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 97.0,
+          "1.0": 100.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_184": {
+        "feature_name": "n_184",
+        "count": 129908539,
+        "min_val": 1.0,
+        "max_val": 100.0,
+        "mean": 99.99766759750874,
+        "std": 0.3821127956918059,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 100.0,
+          "1.0": 100.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_187": {
+        "feature_name": "n_187",
+        "count": 129908478,
+        "min_val": 1.0,
+        "max_val": 100.0,
+        "mean": 99.99990931307809,
+        "std": 0.050721668035814835,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 100.0,
+          "1.0": 100.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_190": {
+        "feature_name": "n_190",
+        "count": 73628672,
+        "min_val": 1.0,
+        "max_val": 100.0,
+        "mean": 79.69852368110075,
+        "std": 7.199117039436707,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 66265,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.08999890694755434,
+        "percentiles": {
+          "0.1": 61.0,
+          "1.0": 65.0,
+          "99.0": 90.0,
+          "99.9": 92.0
+        }
+      },
+      "n_194": {
+        "feature_name": "n_194",
+        "count": 117796899,
+        "min_val": 39.0,
+        "max_val": 100.0,
+        "mean": 85.5123099038456,
+        "std": 12.729079090067446,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 55.0,
+          "1.0": 66.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_195": {
+        "feature_name": "n_195",
+        "count": 91982120,
+        "min_val": 1.0,
+        "max_val": 200.0,
+        "mean": 129.4546969563215,
+        "std": 45.58505330446468,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 100.0,
+          "1.0": 100.0,
+          "99.0": 200.0,
+          "99.9": 200.0
+        }
+      },
+      "n_196": {
+        "feature_name": "n_196",
+        "count": 68035063,
+        "min_val": 17.0,
+        "max_val": 100.0,
+        "mean": 99.94974710319589,
+        "std": 1.1032704425792288,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 99.0,
+          "1.0": 99.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_199": {
+        "feature_name": "n_199",
+        "count": 129908612,
+        "min_val": 1.0,
+        "max_val": 100.0,
+        "mean": 99.97573348716865,
+        "std": 0.7331650166810765,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 99.0,
+          "1.0": 99.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_232": {
+        "feature_name": "n_232",
+        "count": 37926585,
+        "min_val": 58.0,
+        "max_val": 100.0,
+        "mean": 99.82402051226073,
+        "std": 1.5266319853562162,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 79.0,
+          "1.0": 99.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_233": {
+        "feature_name": "n_233",
+        "count": 37926568,
+        "min_val": 1.0,
+        "max_val": 100.0,
+        "mean": 87.30740975560984,
+        "std": 14.047317302327762,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 1.0,
+          "1.0": 31.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_241": {
+        "feature_name": "n_241",
+        "count": 65020729,
+        "min_val": 95.0,
+        "max_val": 100.0,
+        "mean": 99.58217444778265,
+        "std": 0.49676933488118835,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 99.0,
+          "1.0": 99.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_242": {
+        "feature_name": "n_242",
+        "count": 65020776,
+        "min_val": 93.0,
+        "max_val": 100.0,
+        "mean": 99.58221553676935,
+        "std": 0.49595019482109726,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 98.0,
+          "1.0": 99.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_5": {
+        "feature_name": "n_5",
+        "count": 133055427,
+        "min_val": 0.0,
+        "max_val": 100.0,
+        "mean": 99.62863886792081,
+        "std": 1.8676169812456513,
+        "zero_count": 823,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0006185392197493756,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 73.0,
+          "1.0": 94.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "n_9": {
+        "feature_name": "n_9",
+        "count": 133055397,
+        "min_val": 94.0,
+        "max_val": 100.0,
+        "mean": 99.39047967366555,
+        "std": 1.3003174244465021,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 95.0,
+          "1.0": 95.0,
+          "99.0": 100.0,
+          "99.9": 100.0
+        }
+      },
+      "r_1": {
+        "feature_name": "r_1",
+        "count": 68034831,
+        "min_val": 0.0,
+        "max_val": 42949672959.0,
+        "mean": 701849786.6975464,
+        "std": 1580669646.2373571,
+        "zero_count": 52603227,
+        "negative_count": 0,
+        "extreme_count": 0,
+        "percent_zero": 77.31808285082681,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 4294967295.0,
+          "99.9": 4294967295.0
+        }
+      },
+      "r_12": {
+        "feature_name": "r_12",
+        "count": 129908342,
+        "min_val": 1.0,
+        "max_val": 51209.0,
+        "mean": 25.713405525566635,
+        "std": 170.17334505677067,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 129908,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.09999973673746063,
+        "percentiles": {
+          "0.1": 3.0,
+          "1.0": 8.0,
+          "99.0": 72.0,
+          "99.9": 671.0
+        }
+      },
+      "r_170": {
+        "feature_name": "r_170",
+        "count": 94206249,
+        "min_val": 0.0,
+        "max_val": 11311.0,
+        "mean": 3.538431033380811,
+        "std": 88.91853534088979,
+        "zero_count": 86480325,
+        "negative_count": 0,
+        "extreme_count": 94206,
+        "percent_zero": 91.79892620499092,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.09999973568632374,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 17.0,
+          "99.9": 330.0
+        }
+      },
+      "r_171": {
+        "feature_name": "r_171",
+        "count": 102814234,
+        "min_val": 0.0,
+        "max_val": 46424.0,
+        "mean": 2.753274074871773,
+        "std": 267.96134291528915,
+        "zero_count": 97498522,
+        "negative_count": 0,
+        "extreme_count": 92532,
+        "percent_zero": 94.82978981295528,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.08999921158776517,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 3.0,
+          "99.9": 64.0
+        }
+      },
+      "r_172": {
+        "feature_name": "r_172",
+        "count": 102814219,
+        "min_val": 0.0,
+        "max_val": 2314.0,
+        "mean": 0.08598020863242661,
+        "std": 6.935575435514141,
+        "zero_count": 102568487,
+        "negative_count": 0,
+        "extreme_count": 82251,
+        "percent_zero": 99.7609941480954,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.07999963506993134,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 0.0,
+          "99.9": 1.0
+        }
+      },
+      "r_173": {
+        "feature_name": "r_173",
+        "count": 68032443,
+        "min_val": 0.0,
+        "max_val": 4510.0,
+        "mean": 56.047766298793654,
+        "std": 102.96284086576694,
+        "zero_count": 11752652,
+        "negative_count": 0,
+        "extreme_count": 68032,
+        "percent_zero": 17.27506977810572,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.09999934884008206,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 493.0,
+          "99.9": 896.0
+        }
+      },
+      "r_174": {
+        "feature_name": "r_174",
+        "count": 102814239,
+        "min_val": 0.0,
+        "max_val": 51206.0,
+        "mean": 21.77059151310744,
+        "std": 177.11418961806012,
+        "zero_count": 122472,
+        "negative_count": 0,
+        "extreme_count": 102814,
+        "percent_zero": 0.11911968730323433,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0999997675419258,
+        "percentiles": {
+          "0.1": 1.0,
+          "1.0": 4.0,
+          "99.0": 72.0,
+          "99.9": 596.0
+        }
+      },
+      "r_175": {
+        "feature_name": "r_175",
+        "count": 49680548,
+        "min_val": 4295295630.0,
+        "max_val": 1207331258987.0,
+        "mean": 750529293233.9146,
+        "std": 166197967829.70868,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 49680,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.09999889695258596,
+        "percentiles": {
+          "0.1": 43306648212.0,
+          "1.0": 365090243207.0,
+          "99.0": 1117189243511.0,
+          "99.9": 1164433162845.0
+        }
+      },
+      "r_177": {
+        "feature_name": "r_177",
+        "count": 27094150,
+        "min_val": 0.0,
+        "max_val": 6040.0,
+        "mean": 174.79698569617426,
+        "std": 247.17971145044658,
+        "zero_count": 604540,
+        "negative_count": 0,
+        "extreme_count": 27094,
+        "percent_zero": 2.2312565627635483,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.09999944637495548,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 1069.0,
+          "99.9": 3052.0
+        }
+      },
+      "r_180": {
+        "feature_name": "r_180",
+        "count": 95129283,
+        "min_val": 95.0,
+        "max_val": 281470681743359.0,
+        "mean": 4866330133.095291,
+        "std": 877724788756.8887,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 85616,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.08999962713899567,
+        "percentiles": {
+          "0.1": 6412.0,
+          "1.0": 6469.0,
+          "99.0": 4294967295.0,
+          "99.9": 4294967295.0
+        }
+      },
+      "r_181": {
+        "feature_name": "r_181",
+        "count": 27094122,
+        "min_val": 0.0,
+        "max_val": 3017.0,
+        "mean": 5.756871324341125,
+        "std": 98.87706089739736,
+        "zero_count": 26946116,
+        "negative_count": 0,
+        "extreme_count": 27094,
+        "percent_zero": 99.45373391320818,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.09999954971783179,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 0.0,
+          "99.9": 2082.0
+        }
+      },
+      "r_182": {
+        "feature_name": "r_182",
+        "count": 27094169,
+        "min_val": 0.0,
+        "max_val": 2542.0,
+        "mean": 0.1331910936260861,
+        "std": 15.591920731378075,
+        "zero_count": 27075298,
+        "negative_count": 0,
+        "extreme_count": 21675,
+        "percent_zero": 99.93035032740809,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.07999876283343475,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 0.0,
+          "99.9": 0.0
+        }
+      },
+      "r_183": {
+        "feature_name": "r_183",
+        "count": 121300506,
+        "min_val": 0.0,
+        "max_val": 155816.0,
+        "mean": 3.3576776835539333,
+        "std": 379.4826316461578,
+        "zero_count": 120541070,
+        "negative_count": 0,
+        "extreme_count": 121300,
+        "percent_zero": 99.37392182024368,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0999995828541721,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 0.0,
+          "99.9": 836.0
+        }
+      },
+      "r_184": {
+        "feature_name": "r_184",
+        "count": 129908539,
+        "min_val": 0.0,
+        "max_val": 98260840.0,
+        "mean": 265.5085778618448,
+        "std": 161515.6446006497,
+        "zero_count": 129861718,
+        "negative_count": 0,
+        "extreme_count": 12990,
+        "percent_zero": 99.9639584892876,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.009999342691399215,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 0.0,
+          "99.9": 0.0
+        }
+      },
+      "r_187": {
+        "feature_name": "r_187",
+        "count": 129908478,
+        "min_val": 0.0,
+        "max_val": 9309631.0,
+        "mean": 19.776327800561255,
+        "std": 11566.189895849997,
+        "zero_count": 129660434,
+        "negative_count": 0,
+        "extreme_count": 103926,
+        "percent_zero": 99.80906250013952,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.07999939772983869,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 0.0,
+          "99.9": 15.0
+        }
+      },
+      "r_188": {
+        "feature_name": "r_188",
+        "count": 64887888,
+        "min_val": 0.0,
+        "max_val": 714988748.0,
+        "mean": 699.0303295739877,
+        "std": 339716.0528573746,
+        "zero_count": 8110250,
+        "negative_count": 0,
+        "extreme_count": 64887,
+        "percent_zero": 12.498865735929023,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.09999863148574045,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 242.0,
+          "99.9": 1581.0
+        }
+      },
+      "r_190": {
+        "feature_name": "r_190",
+        "count": 73628672,
+        "min_val": 0.0,
+        "max_val": 128.0,
+        "mean": 20.30144786530986,
+        "std": 7.200888180535735,
+        "zero_count": 1,
+        "negative_count": 0,
+        "extreme_count": 51540,
+        "percent_zero": 1.3581665577236e-06,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.06999990438507434,
+        "percentiles": {
+          "0.1": 7.0,
+          "1.0": 10.0,
+          "99.0": 35.0,
+          "99.9": 39.0
+        }
+      },
+      "r_192": {
+        "feature_name": "r_192",
+        "count": 37926545,
+        "min_val": 1.0,
+        "max_val": 51206.0,
+        "mean": 21.848996975601125,
+        "std": 280.91794718922984,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 37926,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.09999856301173755,
+        "percentiles": {
+          "0.1": 1.0,
+          "1.0": 3.0,
+          "99.0": 85.0,
+          "99.9": 1839.0
+        }
+      },
+      "r_194": {
+        "feature_name": "r_194",
+        "count": 117796899,
+        "min_val": 3.0,
+        "max_val": 139.0,
+        "mean": 24.41740325439297,
+        "std": 4.556702335961917,
+        "zero_count": 0,
+        "negative_count": 0,
+        "extreme_count": 106017,
+        "percent_zero": 0.0,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.08999982249108272,
+        "percentiles": {
+          "0.1": 11.0,
+          "1.0": 13.0,
+          "99.0": 35.0,
+          "99.9": 44.0
+        }
+      },
+      "r_195": {
+        "feature_name": "r_195",
+        "count": 91982120,
+        "min_val": 0.0,
+        "max_val": 4294884181.0,
+        "mean": 35143830.377619304,
+        "std": 198081740.05673638,
+        "zero_count": 83038513,
+        "negative_count": 0,
+        "extreme_count": 91982,
+        "percent_zero": 90.276798360377,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.09999986953986276,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 1078168553.0,
+          "99.9": 2261021694.0
+        }
+      },
+      "r_196": {
+        "feature_name": "r_196",
+        "count": 68035063,
+        "min_val": 0.0,
+        "max_val": 11311.0,
+        "mean": 6.864591688553298,
+        "std": 122.54429107110082,
+        "zero_count": 59070697,
+        "negative_count": 0,
+        "extreme_count": 68035,
+        "percent_zero": 86.82390284550776,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.09999990740068838,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 38.0,
+          "99.9": 2176.0
+        }
+      },
+      "r_197": {
+        "feature_name": "r_197",
+        "count": 129908524,
+        "min_val": 0.0,
+        "max_val": 7342.0,
+        "mean": 0.005310783147686291,
+        "std": 1.9164881397147422,
+        "zero_count": 129655313,
+        "negative_count": 0,
+        "extreme_count": 12990,
+        "percent_zero": 99.80508515361163,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.009999343845981962,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 0.0,
+          "99.9": 2.0
+        }
+      },
+      "r_198": {
+        "feature_name": "r_198",
+        "count": 64887942,
+        "min_val": 0.0,
+        "max_val": 747508.0,
+        "mean": 0.10944919473636566,
+        "std": 213.20821827823107,
+        "zero_count": 64180111,
+        "negative_count": 0,
+        "extreme_count": 38932,
+        "percent_zero": 98.90914863658335,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.05999882073621629,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 1.0,
+          "99.9": 2.0
+        }
+      },
+      "r_199": {
+        "feature_name": "r_199",
+        "count": 129908612,
+        "min_val": 0.0,
+        "max_val": 5840350.0,
+        "mean": 243.52402217953033,
+        "std": 19645.956919447508,
+        "zero_count": 117825036,
+        "negative_count": 0,
+        "extreme_count": 129908,
+        "percent_zero": 90.69840265863205,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0999995288995929,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 133.0,
+          "99.9": 4580.0
+        }
+      },
+      "r_206": {
+        "feature_name": "r_206",
+        "count": 56279978,
+        "min_val": 0.0,
+        "max_val": 16980.0,
+        "mean": 0.13112362979246367,
+        "std": 25.79535607935769,
+        "zero_count": 53265314,
+        "negative_count": 0,
+        "extreme_count": 56279,
+        "percent_zero": 94.64345206389385,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.09999826225944863,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 1.0,
+          "99.9": 11.0
+        }
+      },
+      "r_241": {
+        "feature_name": "r_241",
+        "count": 65020729,
+        "min_val": 0.0,
+        "max_val": 12615022612244.0,
+        "mean": 147408209488.68555,
+        "std": 322916724286.5953,
+        "zero_count": 25329,
+        "negative_count": 0,
+        "extreme_count": 65020,
+        "percent_zero": 0.03895526917269722,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.09999887881909168,
+        "percentiles": {
+          "0.1": 4011.0,
+          "1.0": 37451.0,
+          "99.0": 1372053864096.0,
+          "99.9": 2861915637163.0
+        }
+      },
+      "r_242": {
+        "feature_name": "r_242",
+        "count": 65020776,
+        "min_val": 0.0,
+        "max_val": 18647553342824.0,
+        "mean": 99906778291.48131,
+        "std": 262915296184.79587,
+        "zero_count": 5372,
+        "negative_count": 0,
+        "extreme_count": 65020,
+        "percent_zero": 0.008261974603317561,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.0999988065353142,
+        "percentiles": {
+          "0.1": 6045.0,
+          "1.0": 22612.0,
+          "99.0": 1205204145739.0,
+          "99.9": 3045838092161.0
+        }
+      },
+      "r_244": {
+        "feature_name": "r_244",
+        "count": 27094189,
+        "min_val": 0.0,
+        "max_val": 873.0,
+        "mean": 0.006034319757642496,
+        "std": 1.8663734410818775,
+        "zero_count": 27092847,
+        "negative_count": 0,
+        "extreme_count": 2709,
+        "percent_zero": 99.99504690839795,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.009998453912017813,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 0.0,
+          "99.9": 0.0
+        }
+      },
+      "r_5": {
+        "feature_name": "r_5",
+        "count": 133055427,
+        "min_val": 0.0,
+        "max_val": 11311.0,
+        "mean": 7.813554835309348,
+        "std": 126.42635386473349,
+        "zero_count": 121241385,
+        "negative_count": 0,
+        "extreme_count": 133055,
+        "percent_zero": 91.12096194317576,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.09999967908110956,
+        "percentiles": {
+          "0.1": 0.0,
+          "1.0": 0.0,
+          "99.0": 21.0,
+          "99.9": 2043.0
+        }
+      },
+      "r_9": {
+        "feature_name": "r_9",
+        "count": 133055397,
+        "min_val": 0.0,
+        "max_val": 47283.0,
+        "mean": 16301.075453158806,
+        "std": 11716.460451043895,
+        "zero_count": 6,
+        "negative_count": 0,
+        "extreme_count": 133055,
+        "percent_zero": 4.509399945648203e-06,
+        "percent_negative": 0.0,
+        "percent_extreme": 0.09999970162803692,
+        "percentiles": {
+          "0.1": 75.0,
+          "1.0": 482.0,
+          "99.0": 41148.0,
+          "99.9": 45524.0
+        }
+      }
+    }
+  }
+}

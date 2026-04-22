@@ -1,0 +1,59 @@
+# Selected SMART features for feature engineering (log1p, temporal stats, etc.).
+# Only raw_features get log1p_* and temporal derivatives; norm_features are passed through.
+# Derived from reports/feature_ranking_y30.csv (top by rank).
+
+raw_features:
+  - r_175
+  - r_190
+  - r_241
+  - r_1
+  - r_173
+  - r_242
+  - r_9
+  - r_196
+  - r_195
+  - r_170
+  - r_194
+  - r_177
+  - r_5
+  - r_183
+  - r_12
+
+norm_features:
+  - n_242
+  - n_241
+  - n_180
+  - n_190
+  - n_173
+  - n_12
+  - n_9
+  - n_5
+  - n_196
+  - n_194
+  - n_177
+  - n_183
+  - n_170
+  - n_199
+  - n_175
+
+# Row caps per split (chronological stream: partition order, then smart_day, disk_id).
+# Applied after temporal features; no shuffle before deltas / rolling stats.
+row_caps:
+  train: 5000000
+  val: 2000000
+  test: 2000000
+
+# Calendar-day, past-only temporal features on log1p(raw) series (one block per raw column).
+# delta1 / delta7: v(D) - v(D-k) where v is log1p(r_*), using calendar days from smart_day.
+# rollmean7 / rollstd7 (or rollvar7): over inclusive window [D-6 .. D] (7 calendar days).
+temporal:
+  base_columns: null  # null = use raw_features above
+  rolling_window_days: 7
+  # Rolling dispersion: "std" (rollstd7_*) or "var" (rollvar7_*)
+  roll_dispersion: std
+
+# One instability column per temporal base column (same log1p scale).
+instability:
+  # abs_delta1: |delta1| on the log1p series (matches delta1_* column).
+  metric: abs_delta1
+  column_prefix: instab_

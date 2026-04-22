@@ -1,0 +1,60 @@
+{
+  "experiment_name": "exp_time_generalisation__train_eval",
+  "timestamp": "2026-02-13T03:33:25.452207",
+  "label_column": "y_14",
+  "class_weight": "none",
+  "data_summary": {
+    "train": {
+      "rows": 5000000,
+      "positives": 116666,
+      "negatives": 4883334
+    },
+    "val": {
+      "rows": 2000000,
+      "positives": 27555,
+      "negatives": 1972445
+    },
+    "test": {
+      "rows": 2000000,
+      "positives": 34733,
+      "negatives": 1965267
+    }
+  },
+  "feature_info": {
+    "feature_count": 55,
+    "missingness_before_imputation_pct": 40.19278836363636
+  },
+  "models": {
+    "random_forest": {
+      "class_weight": "none",
+      "best_threshold": 0.53,
+      "val": {
+        "split_name": "val",
+        "pr_auc": 0.022708958965915155,
+        "roc_auc": 0.5269189813462456,
+        "threshold": 0.53,
+        "precision": 0.0726264631391608,
+        "recall": 0.038504808564688804,
+        "f1": 0.05032729342567119,
+        "tn": "1958897",
+        "fp": "13548",
+        "fn": "26494",
+        "tp": "1061"
+      },
+      "test": {
+        "split_name": "test",
+        "pr_auc": 0.018396471830237446,
+        "roc_auc": 0.5048317218251155,
+        "threshold": 0.53,
+        "precision": 0.02311749523061385,
+        "recall": 0.01186191806063398,
+        "f1": 0.015678812672438397,
+        "tn": "1947857",
+        "fp": "17410",
+        "fn": "34321",
+        "tp": "412"
+      }
+    }
+  },
+  "processing_time_seconds": 337.918108
+}

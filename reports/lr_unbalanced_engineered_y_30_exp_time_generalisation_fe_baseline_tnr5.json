@@ -1,0 +1,163 @@
+{
+  "experiment_name": "exp_time_generalisation",
+  "timestamp": "2026-04-10T04:53:24.788363",
+  "label_column": "y_30",
+  "data_source": "data_engineered",
+  "class_weight": "balanced",
+  "feature_set": "baseline",
+  "feature_policy": "column_matches_feature_set",
+  "feature_names": [
+    "n_1",
+    "n_12",
+    "n_170",
+    "n_171",
+    "n_172",
+    "n_173",
+    "n_175",
+    "n_177",
+    "n_180",
+    "n_181",
+    "n_182",
+    "n_183",
+    "n_184",
+    "n_187",
+    "n_190",
+    "n_194",
+    "n_195",
+    "n_196",
+    "n_199",
+    "n_232",
+    "n_233",
+    "n_241",
+    "n_242",
+    "n_5",
+    "n_9",
+    "r_1",
+    "r_12",
+    "r_170",
+    "r_171",
+    "r_172",
+    "r_173",
+    "r_174",
+    "r_175",
+    "r_177",
+    "r_180",
+    "r_181",
+    "r_182",
+    "r_183",
+    "r_184",
+    "r_187",
+    "r_188",
+    "r_190",
+    "r_192",
+    "r_194",
+    "r_195",
+    "r_196",
+    "r_197",
+    "r_198",
+    "r_199",
+    "r_206",
+    "r_241",
+    "r_242",
+    "r_244",
+    "r_5",
+    "r_9"
+  ],
+  "row_cap_policy": "keep_all_positives_sample_negatives_shuffle",
+  "train_negative_downsampling": {
+    "enabled": true,
+    "negatives_per_positive_requested": 5,
+    "train_pool_before_downsample": {
+      "rows": 5000000,
+      "positives": 4516,
+      "negatives": 4995484
+    },
+    "note": "Train rows after downsampling are in data_summary.train (used for LR fit). Val/test unchanged."
+  },
+  "data_summary": {
+    "train": {
+      "rows": 27096,
+      "positives": 4516,
+      "negatives": 22580
+    },
+    "val": {
+      "rows": 2000000,
+      "positives": 9738,
+      "negatives": 1990262
+    },
+    "test": {
+      "rows": 2000000,
+      "positives": 13708,
+      "negatives": 1986292
+    }
+  },
+  "feature_info": {
+    "feature_count": 55,
+    "missingness_before_imputation_pct": 43.926577555895534
+  },
+  "models": {
+    "always_negative": {
+      "val": {
+        "split_name": "val",
+        "accuracy": 0.995131,
+        "pr_auc": 0.004869,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": 1990262,
+        "fp": 0,
+        "fn": 9738,
+        "tp": 0
+      },
+      "test": {
+        "split_name": "test",
+        "accuracy": 0.993146,
+        "pr_auc": 0.006854,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": 1986292,
+        "fp": 0,
+        "fn": 13708,
+        "tp": 0
+      }
+    },
+    "logistic_regression": {
+      "class_weight": "balanced",
+      "best_threshold": 0.78,
+      "val": {
+        "split_name": "val",
+        "accuracy": 0.9878875,
+        "pr_auc": 0.009511571890579522,
+        "roc_auc": 0.5932456417780201,
+        "threshold": 0.78,
+        "precision": 0.04123123693710811,
+        "recall": 0.06685150955021565,
+        "f1": 0.051004818427547303,
+        "tn": 1975124,
+        "fp": 15138,
+        "fn": 9087,
+        "tp": 651
+      },
+      "test": {
+        "split_name": "test",
+        "accuracy": 0.9842515,
+        "pr_auc": 0.00681271113393228,
+        "roc_auc": 0.4867878250080766,
+        "threshold": 0.78,
+        "precision": 0.007202615103329825,
+        "recall": 0.009483513276918588,
+        "f1": 0.008187171332304689,
+        "tn": 1968373,
+        "fp": 17919,
+        "fn": 13578,
+        "tp": 130
+      }
+    }
+  },
+  "processing_time_seconds": 28.850552
+}

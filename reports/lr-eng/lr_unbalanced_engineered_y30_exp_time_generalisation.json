@@ -1,0 +1,93 @@
+{
+  "experiment_name": "exp_time_generalisation",
+  "timestamp": "2026-02-20T03:00:45.573581",
+  "label_column": "y_30",
+  "data_source": "data_engineered",
+  "class_weight": null,
+  "data_summary": {
+    "train": {
+      "rows": 5000000,
+      "positives": 4637,
+      "negatives": 4995363
+    },
+    "val": {
+      "rows": 2000000,
+      "positives": 7595,
+      "negatives": 1992405
+    },
+    "test": {
+      "rows": 2000000,
+      "positives": 13657,
+      "negatives": 1986343
+    }
+  },
+  "feature_info": {
+    "feature_count": 72,
+    "missingness_before_imputation_pct": 30.958279444444443
+  },
+  "models": {
+    "always_negative": {
+      "val": {
+        "split_name": "val",
+        "accuracy": 0.9962025,
+        "pr_auc": 0.0037975,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": 1992405,
+        "fp": 0,
+        "fn": 7595,
+        "tp": 0
+      },
+      "test": {
+        "split_name": "test",
+        "accuracy": 0.9931715,
+        "pr_auc": 0.0068285,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": 1986343,
+        "fp": 0,
+        "fn": 13657,
+        "tp": 0
+      }
+    },
+    "logistic_regression": {
+      "class_weight": null,
+      "best_threshold": 0.01,
+      "val": {
+        "split_name": "val",
+        "accuracy": 0.995637,
+        "pr_auc": 0.009715229924401424,
+        "roc_auc": 0.5776464226256682,
+        "threshold": 0.01,
+        "precision": 0.10647181628392484,
+        "recall": 0.02014483212639895,
+        "f1": 0.03387953941541187,
+        "tn": 1991121,
+        "fp": 1284,
+        "fn": 7442,
+        "tp": 153
+      },
+      "test": {
+        "split_name": "test",
+        "accuracy": 0.9924725,
+        "pr_auc": 0.007499547707371743,
+        "roc_auc": 0.48769876295642484,
+        "threshold": 0.01,
+        "precision": 0.017265193370165747,
+        "recall": 0.0018305630812037782,
+        "f1": 0.0033101621979476996,
+        "tn": 1984920,
+        "fp": 1423,
+        "fn": 13632,
+        "tp": 25
+      }
+    }
+  },
+  "processing_time_seconds": 2667.421196
+}

@@ -1,0 +1,177 @@
+{
+  "experiment_name": "exp_time_generalisation",
+  "timestamp": "2026-04-10T17:03:01.298320",
+  "model": "xgboost",
+  "label_column": "y_30",
+  "data_source": "data_engineered",
+  "imbalance_mode": "none",
+  "scale_pos_weight": null,
+  "xgboost_hyperparameters": {
+    "n_estimators": 300,
+    "max_depth": 6,
+    "learning_rate": 0.05,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "objective": "binary:logistic",
+    "eval_metric": "logloss",
+    "n_jobs": -1
+  },
+  "feature_set": "baseline",
+  "feature_policy": "column_matches_feature_set (shared with LR/RF runners)",
+  "feature_names": [
+    "n_1",
+    "n_12",
+    "n_170",
+    "n_171",
+    "n_172",
+    "n_173",
+    "n_175",
+    "n_177",
+    "n_180",
+    "n_181",
+    "n_182",
+    "n_183",
+    "n_184",
+    "n_187",
+    "n_190",
+    "n_194",
+    "n_195",
+    "n_196",
+    "n_199",
+    "n_232",
+    "n_233",
+    "n_241",
+    "n_242",
+    "n_5",
+    "n_9",
+    "r_1",
+    "r_12",
+    "r_170",
+    "r_171",
+    "r_172",
+    "r_173",
+    "r_174",
+    "r_175",
+    "r_177",
+    "r_180",
+    "r_181",
+    "r_182",
+    "r_183",
+    "r_184",
+    "r_187",
+    "r_188",
+    "r_190",
+    "r_192",
+    "r_194",
+    "r_195",
+    "r_196",
+    "r_197",
+    "r_198",
+    "r_199",
+    "r_206",
+    "r_241",
+    "r_242",
+    "r_244",
+    "r_5",
+    "r_9"
+  ],
+  "row_cap_policy": "keep_all_positives_sample_negatives_shuffle",
+  "preprocessing": "SimpleImputer(strategy='median') + StandardScaler \u2014 same as LR and RF engineered runners for fair comparison (explicit in logs/reports).",
+  "train_negative_downsampling": {
+    "enabled": true,
+    "negatives_per_positive_requested": 2,
+    "train_pool_before_downsample": {
+      "rows": 5000000,
+      "positives": 4516,
+      "negatives": 4995484
+    },
+    "note": "Train rows after downsampling are in data_summary.train (used for XGB fit). Val/test unchanged."
+  },
+  "data_summary": {
+    "train": {
+      "rows": 13548,
+      "positives": 4516,
+      "negatives": 9032
+    },
+    "val": {
+      "rows": 2000000,
+      "positives": 9738,
+      "negatives": 1990262
+    },
+    "test": {
+      "rows": 2000000,
+      "positives": 13708,
+      "negatives": 1986292
+    }
+  },
+  "feature_info": {
+    "feature_count": 55,
+    "missingness_before_imputation_pct": 44.05615052204955
+  },
+  "models": {
+    "always_negative": {
+      "val": {
+        "split_name": "val",
+        "accuracy": 0.995131,
+        "pr_auc": 0.004869,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": 1990262,
+        "fp": 0,
+        "fn": 9738,
+        "tp": 0
+      },
+      "test": {
+        "split_name": "test",
+        "accuracy": 0.993146,
+        "pr_auc": 0.006854,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": 1986292,
+        "fp": 0,
+        "fn": 13708,
+        "tp": 0
+      }
+    },
+    "xgboost": {
+      "imbalance_mode": "none",
+      "scale_pos_weight": null,
+      "best_threshold": 0.75,
+      "val": {
+        "split_name": "val",
+        "accuracy": 0.993755,
+        "pr_auc": 0.012252272171113836,
+        "roc_auc": 0.5609968577381169,
+        "threshold": 0.75,
+        "precision": 0.07452071737786023,
+        "recall": 0.024748408297391663,
+        "f1": 0.03715695343817453,
+        "tn": 1987269,
+        "fp": 2993,
+        "fn": 9497,
+        "tp": 241
+      },
+      "test": {
+        "split_name": "test",
+        "accuracy": 0.9917235,
+        "pr_auc": 0.0064670633596699105,
+        "roc_auc": 0.47145069393454664,
+        "threshold": 0.75,
+        "precision": 0.008974801518812565,
+        "recall": 0.0018967026553837175,
+        "f1": 0.00313158687142427,
+        "tn": 1983421,
+        "fp": 2871,
+        "fn": 13682,
+        "tp": 26
+      }
+    }
+  },
+  "processing_time_seconds": 32.645851
+}

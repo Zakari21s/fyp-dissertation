@@ -1,0 +1,173 @@
+{
+  "dataset": "smartlog2018ssd",
+  "stage": 6,
+  "timestamp": "2026-02-06T18:30:19.744608",
+  "statistics": {
+    "total_partitions": 12,
+    "partitions_processed": 12,
+    "partitions_failed": 0,
+    "total_rows_in": 133559111,
+    "total_rows_out": 133559111,
+    "rows_dropped_missing_disk_id": 0,
+    "rows_dropped_missing_model": 0,
+    "rows_dropped_missing_smart_day": 0,
+    "rows_dropped_missing_ds": 0,
+    "rows_dropped_invalid_labels": 0,
+    "num_negative_r_values_fixed_to_nan": {},
+    "num_out_of_range_n_values_fixed_to_nan": {
+      "n_1": 11755131,
+      "n_180": 11753104,
+      "n_195": 27093647
+    },
+    "duplicate_key_count_per_partition": {
+      "year=2018/month=01": 0,
+      "year=2018/month=02": 0,
+      "year=2018/month=03": 0,
+      "year=2018/month=04": 0,
+      "year=2018/month=05": 0,
+      "year=2018/month=06": 0,
+      "year=2018/month=07": 0,
+      "year=2018/month=08": 0,
+      "year=2018/month=09": 0,
+      "year=2018/month=10": 0,
+      "year=2018/month=11": 0,
+      "year=2018/month=12": 0
+    },
+    "sample_invalid_rows": {},
+    "partition_stats": [
+      {
+        "partition": "year=2018/month=01",
+        "rows_in": 10529353,
+        "rows_out": 10529353,
+        "rows_dropped_missing_disk_id": 0,
+        "rows_dropped_missing_model": 0,
+        "rows_dropped_missing_smart_day": 0,
+        "rows_dropped_missing_ds": 0,
+        "rows_dropped_invalid_labels": 0,
+        "duplicate_key_count": 0
+      },
+      {
+        "partition": "year=2018/month=02",
+        "rows_in": 9668382,
+        "rows_out": 9668382,
+        "rows_dropped_missing_disk_id": 0,
+        "rows_dropped_missing_model": 0,
+        "rows_dropped_missing_smart_day": 0,
+        "rows_dropped_missing_ds": 0,
+        "rows_dropped_invalid_labels": 0,
+        "duplicate_key_count": 0
+      },
+      {
+        "partition": "year=2018/month=03",
+        "rows_in": 10947243,
+        "rows_out": 10947243,
+        "rows_dropped_missing_disk_id": 0,
+        "rows_dropped_missing_model": 0,
+        "rows_dropped_missing_smart_day": 0,
+        "rows_dropped_missing_ds": 0,
+        "rows_dropped_invalid_labels": 0,
+        "duplicate_key_count": 0
+      },
+      {
+        "partition": "year=2018/month=04",
+        "rows_in": 10447825,
+        "rows_out": 10447825,
+        "rows_dropped_missing_disk_id": 0,
+        "rows_dropped_missing_model": 0,
+        "rows_dropped_missing_smart_day": 0,
+        "rows_dropped_missing_ds": 0,
+        "rows_dropped_invalid_labels": 0,
+        "duplicate_key_count": 0
+      },
+      {
+        "partition": "year=2018/month=05",
+        "rows_in": 11314286,
+        "rows_out": 11314286,
+        "rows_dropped_missing_disk_id": 0,
+        "rows_dropped_missing_model": 0,
+        "rows_dropped_missing_smart_day": 0,
+        "rows_dropped_missing_ds": 0,
+        "rows_dropped_invalid_labels": 0,
+        "duplicate_key_count": 0
+      },
+      {
+        "partition": "year=2018/month=06",
+        "rows_in": 11203125,
+        "rows_out": 11203125,
+        "rows_dropped_missing_disk_id": 0,
+        "rows_dropped_missing_model": 0,
+        "rows_dropped_missing_smart_day": 0,
+        "rows_dropped_missing_ds": 0,
+        "rows_dropped_invalid_labels": 0,
+        "duplicate_key_count": 0
+      },
+      {
+        "partition": "year=2018/month=07",
+        "rows_in": 11647453,
+        "rows_out": 11647453,
+        "rows_dropped_missing_disk_id": 0,
+        "rows_dropped_missing_model": 0,
+        "rows_dropped_missing_smart_day": 0,
+        "rows_dropped_missing_ds": 0,
+        "rows_dropped_invalid_labels": 0,
+        "duplicate_key_count": 0
+      },
+      {
+        "partition": "year=2018/month=08",
+        "rows_in": 12016685,
+        "rows_out": 12016685,
+        "rows_dropped_missing_disk_id": 0,
+        "rows_dropped_missing_model": 0,
+        "rows_dropped_missing_smart_day": 0,
+        "rows_dropped_missing_ds": 0,
+        "rows_dropped_invalid_labels": 0,
+        "duplicate_key_count": 0
+      },
+      {
+        "partition": "year=2018/month=09",
+        "rows_in": 11633245,
+        "rows_out": 11633245,
+        "rows_dropped_missing_disk_id": 0,
+        "rows_dropped_missing_model": 0,
+        "rows_dropped_missing_smart_day": 0,
+        "rows_dropped_missing_ds": 0,
+        "rows_dropped_invalid_labels": 0,
+        "duplicate_key_count": 0
+      },
+      {
+        "partition": "year=2018/month=10",
+        "rows_in": 11772193,
+        "rows_out": 11772193,
+        "rows_dropped_missing_disk_id": 0,
+        "rows_dropped_missing_model": 0,
+        "rows_dropped_missing_smart_day": 0,
+        "rows_dropped_missing_ds": 0,
+        "rows_dropped_invalid_labels": 0,
+        "duplicate_key_count": 0
+      },
+      {
+        "partition": "year=2018/month=11",
+        "rows_in": 10304367,
+        "rows_out": 10304367,
+        "rows_dropped_missing_disk_id": 0,
+        "rows_dropped_missing_model": 0,
+        "rows_dropped_missing_smart_day": 0,
+        "rows_dropped_missing_ds": 0,
+        "rows_dropped_invalid_labels": 0,
+        "duplicate_key_count": 0
+      },
+      {
+        "partition": "year=2018/month=12",
+        "rows_in": 12074954,
+        "rows_out": 12074954,
+        "rows_dropped_missing_disk_id": 0,
+        "rows_dropped_missing_model": 0,
+        "rows_dropped_missing_smart_day": 0,
+        "rows_dropped_missing_ds": 0,
+        "rows_dropped_invalid_labels": 0,
+        "duplicate_key_count": 0
+      }
+    ],
+    "processing_time_seconds": 182.481784
+  }
+}

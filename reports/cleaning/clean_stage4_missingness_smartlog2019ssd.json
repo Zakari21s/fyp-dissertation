@@ -1,0 +1,309 @@
+{
+  "dataset": "smartlog2019ssd",
+  "stage": 4,
+  "timestamp": "2026-02-06T16:14:28.406565",
+  "statistics": {
+    "total_partitions": 12,
+    "partitions_processed": 12,
+    "partitions_failed": 0,
+    "total_rows_in": 128776521,
+    "total_rows_out": 128776521,
+    "rows_dropped_min_features": 0,
+    "num_smart_features_original": 102,
+    "num_smart_features_dropped_low_coverage": 36,
+    "num_smart_features_dropped_constant": 11,
+    "num_smart_features_kept": 55,
+    "top_20_most_missing_features": [
+      [
+        "n_10",
+        0.0,
+        1.0
+      ],
+      [
+        "n_11",
+        0.0,
+        1.0
+      ],
+      [
+        "n_13",
+        0.0,
+        1.0
+      ],
+      [
+        "n_189",
+        0.0,
+        1.0
+      ],
+      [
+        "n_191",
+        0.0,
+        1.0
+      ],
+      [
+        "n_193",
+        0.0,
+        1.0
+      ],
+      [
+        "n_2",
+        0.0,
+        1.0
+      ],
+      [
+        "n_200",
+        0.0,
+        1.0
+      ],
+      [
+        "n_204",
+        0.0,
+        1.0
+      ],
+      [
+        "n_205",
+        0.0,
+        1.0
+      ],
+      [
+        "n_207",
+        0.0,
+        1.0
+      ],
+      [
+        "n_240",
+        0.0,
+        1.0
+      ],
+      [
+        "n_3",
+        0.0,
+        1.0
+      ],
+      [
+        "n_4",
+        0.0,
+        1.0
+      ],
+      [
+        "n_6",
+        0.0,
+        1.0
+      ],
+      [
+        "n_7",
+        0.0,
+        1.0
+      ],
+      [
+        "n_8",
+        0.0,
+        1.0
+      ],
+      [
+        "r_10",
+        0.0,
+        1.0
+      ],
+      [
+        "r_11",
+        0.0,
+        1.0
+      ],
+      [
+        "r_13",
+        0.0,
+        1.0
+      ]
+    ],
+    "dropped_features": [
+      "n_10",
+      "n_11",
+      "n_13",
+      "n_174",
+      "n_188",
+      "n_189",
+      "n_191",
+      "n_192",
+      "n_193",
+      "n_197",
+      "n_198",
+      "n_2",
+      "n_200",
+      "n_204",
+      "n_205",
+      "n_206",
+      "n_207",
+      "n_211",
+      "n_240",
+      "n_244",
+      "n_245",
+      "n_3",
+      "n_4",
+      "n_6",
+      "n_7",
+      "n_8",
+      "r_10",
+      "r_11",
+      "r_13",
+      "r_189",
+      "r_191",
+      "r_193",
+      "r_2",
+      "r_200",
+      "r_204",
+      "r_205",
+      "r_207",
+      "r_211",
+      "r_232",
+      "r_233",
+      "r_240",
+      "r_245",
+      "r_3",
+      "r_4",
+      "r_6",
+      "r_7",
+      "r_8"
+    ],
+    "kept_features": [
+      "n_1",
+      "n_12",
+      "n_170",
+      "n_171",
+      "n_172",
+      "n_173",
+      "n_175",
+      "n_177",
+      "n_180",
+      "n_181",
+      "n_182",
+      "n_183",
+      "n_184",
+      "n_187",
+      "n_190",
+      "n_194",
+      "n_195",
+      "n_196",
+      "n_199",
+      "n_232",
+      "n_233",
+      "n_241",
+      "n_242",
+      "n_5",
+      "n_9",
+      "r_1",
+      "r_12",
+      "r_170",
+      "r_171",
+      "r_172",
+      "r_173",
+      "r_174",
+      "r_175",
+      "r_177",
+      "r_180",
+      "r_181",
+      "r_182",
+      "r_183",
+      "r_184",
+      "r_187",
+      "r_188",
+      "r_190",
+      "r_192",
+      "r_194",
+      "r_195",
+      "r_196",
+      "r_197",
+      "r_198",
+      "r_199",
+      "r_206",
+      "r_241",
+      "r_242",
+      "r_244",
+      "r_5",
+      "r_9"
+    ],
+    "partition_stats": [
+      {
+        "partition": "year=2019/month=01",
+        "rows_in": 12148058,
+        "rows_out": 12148058,
+        "rows_dropped_min_features": 0
+      },
+      {
+        "partition": "year=2019/month=02",
+        "rows_in": 10872424,
+        "rows_out": 10872424,
+        "rows_dropped_min_features": 0
+      },
+      {
+        "partition": "year=2019/month=03",
+        "rows_in": 12068266,
+        "rows_out": 12068266,
+        "rows_dropped_min_features": 0
+      },
+      {
+        "partition": "year=2019/month=04",
+        "rows_in": 11307999,
+        "rows_out": 11307999,
+        "rows_dropped_min_features": 0
+      },
+      {
+        "partition": "year=2019/month=05",
+        "rows_in": 11731037,
+        "rows_out": 11731037,
+        "rows_dropped_min_features": 0
+      },
+      {
+        "partition": "year=2019/month=06",
+        "rows_in": 10611803,
+        "rows_out": 10611803,
+        "rows_dropped_min_features": 0
+      },
+      {
+        "partition": "year=2019/month=07",
+        "rows_in": 11083718,
+        "rows_out": 11083718,
+        "rows_dropped_min_features": 0
+      },
+      {
+        "partition": "year=2019/month=08",
+        "rows_in": 11059118,
+        "rows_out": 11059118,
+        "rows_dropped_min_features": 0
+      },
+      {
+        "partition": "year=2019/month=09",
+        "rows_in": 10550469,
+        "rows_out": 10550469,
+        "rows_dropped_min_features": 0
+      },
+      {
+        "partition": "year=2019/month=10",
+        "rows_in": 10228261,
+        "rows_out": 10228261,
+        "rows_dropped_min_features": 0
+      },
+      {
+        "partition": "year=2019/month=11",
+        "rows_in": 8975113,
+        "rows_out": 8975113,
+        "rows_dropped_min_features": 0
+      },
+      {
+        "partition": "year=2019/month=12",
+        "rows_in": 8140255,
+        "rows_out": 8140255,
+        "rows_dropped_min_features": 0
+      }
+    ],
+    "processing_time_seconds": 177.544534,
+    "config": {
+      "batch_size": 250000,
+      "min_feature_coverage": 0.01,
+      "drop_constant_features": true,
+      "enable_row_filter": false,
+      "min_features_per_row": 5,
+      "enable_missing_indicators": false,
+      "indicators_top_k": 20
+    }
+  }
+}

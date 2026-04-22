@@ -1,0 +1,85 @@
+{
+  "experiment_name": "exp_time_generalisation__train_eval",
+  "timestamp": "2026-02-12T16:14:18.560788",
+  "data_summary": {
+    "train": {
+      "rows": 5000000,
+      "positives": 58010,
+      "negatives": 4941990
+    },
+    "val": {
+      "rows": 2000000,
+      "positives": 14878,
+      "negatives": 1985122
+    },
+    "test": {
+      "rows": 2000000,
+      "positives": 18328,
+      "negatives": 1981672
+    }
+  },
+  "feature_info": {
+    "feature_count": 55,
+    "missingness_before_imputation_pct": 40.196144363636364
+  },
+  "models": {
+    "always_negative": {
+      "val": {
+        "split_name": "val",
+        "pr_auc": 0.007439,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": "1985122",
+        "fp": "0",
+        "fn": "14878",
+        "tp": "0"
+      },
+      "test": {
+        "split_name": "test",
+        "pr_auc": 0.009164,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": "1981672",
+        "fp": "0",
+        "fn": "18328",
+        "tp": "0"
+      }
+    },
+    "logistic_regression": {
+      "best_threshold": 0.06,
+      "val": {
+        "split_name": "val",
+        "pr_auc": 0.009149588406009925,
+        "roc_auc": 0.5190979764708408,
+        "threshold": 0.06,
+        "precision": 0.015437313398291944,
+        "recall": 0.04483129452883452,
+        "f1": 0.022966342429198587,
+        "tn": "1942582",
+        "fp": "42540",
+        "fn": "14211",
+        "tp": "667"
+      },
+      "test": {
+        "split_name": "test",
+        "pr_auc": 0.010687651443655539,
+        "roc_auc": 0.522300891532157,
+        "threshold": 0.06,
+        "precision": 0.01039836594060757,
+        "recall": 0.26609559144478395,
+        "f1": 0.020014609803342197,
+        "tn": "1517533",
+        "fp": "464139",
+        "fn": "13451",
+        "tp": "4877"
+      }
+    }
+  },
+  "processing_time_seconds": 280.694224
+}

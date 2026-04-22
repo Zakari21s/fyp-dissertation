@@ -1,0 +1,88 @@
+{
+  "experiment_name": "exp_time_generalisation__train_eval",
+  "timestamp": "2026-02-12T17:12:09.925621",
+  "label_column": "y_14",
+  "class_weight": "balanced",
+  "data_summary": {
+    "train": {
+      "rows": 5000000,
+      "positives": 116666,
+      "negatives": 4883334
+    },
+    "val": {
+      "rows": 2000000,
+      "positives": 27555,
+      "negatives": 1972445
+    },
+    "test": {
+      "rows": 2000000,
+      "positives": 34733,
+      "negatives": 1965267
+    }
+  },
+  "feature_info": {
+    "feature_count": 55,
+    "missingness_before_imputation_pct": 40.19278836363636
+  },
+  "models": {
+    "always_negative": {
+      "val": {
+        "split_name": "val",
+        "pr_auc": 0.0137775,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": "1972445",
+        "fp": "0",
+        "fn": "27555",
+        "tp": "0"
+      },
+      "test": {
+        "split_name": "test",
+        "pr_auc": 0.0173665,
+        "roc_auc": 0.5,
+        "threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "tn": "1965267",
+        "fp": "0",
+        "fn": "34733",
+        "tp": "0"
+      }
+    },
+    "logistic_regression": {
+      "class_weight": "balanced",
+      "best_threshold": 0.8300000000000001,
+      "val": {
+        "split_name": "val",
+        "pr_auc": 0.015905813628634413,
+        "roc_auc": 0.5204143659583834,
+        "threshold": 0.8300000000000001,
+        "precision": 0.021804944856916312,
+        "recall": 0.0658682634730539,
+        "f1": 0.032763802767322846,
+        "tn": "1891022",
+        "fp": "81423",
+        "fn": "25740",
+        "tp": "1815"
+      },
+      "test": {
+        "split_name": "test",
+        "pr_auc": 0.01918344709618719,
+        "roc_auc": 0.5262571281578396,
+        "threshold": 0.8300000000000001,
+        "precision": 0.020036665821085906,
+        "recall": 0.320646071459419,
+        "f1": 0.03771648796743452,
+        "tn": "1420573",
+        "fp": "544694",
+        "fn": "23596",
+        "tp": "11137"
+      }
+    }
+  },
+  "processing_time_seconds": 275.180821
+}
